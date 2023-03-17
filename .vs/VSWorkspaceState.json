@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bin",
+    "\\src",
+    "\\src\\bin",
+    "\\src\\bin\\Debug",
+    "\\src\\bin\\Debug\\net6.0-windows",
+    "\\src\\bin\\Release",
+    "\\src\\bin\\Release\\net6.0-windows"
+  ],
+  "SelectedNode": "\\src\\src.csproj",
+  "PreviewInSolutionExplorer": false
+}
