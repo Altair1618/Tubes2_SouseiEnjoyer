@@ -1,0 +1,15 @@
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.csproj.AssemblyReference.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.GeneratedMSBuildEditorConfig.editorconfig
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.AssemblyInfoInputs.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.AssemblyInfo.cs
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.csproj.CoreCompileInputs.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\bin\Debug\net6.0-windows\driver.exe
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\bin\Debug\net6.0-windows\driver.deps.json
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\bin\Debug\net6.0-windows\driver.runtimeconfig.json
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\bin\Debug\net6.0-windows\driver.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\bin\Debug\net6.0-windows\driver.pdb
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\refint\driver.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.pdb
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\driver.genruntimeconfig.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\Driver\obj\Debug\net6.0-windows\ref\driver.dll
