@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	  <OutputPath>../bin</OutputPath>
+	  <StartupObject>src.App</StartupObject>
   </PropertyGroup>
 
 </Project>

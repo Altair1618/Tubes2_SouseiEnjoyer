@@ -1,14 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\bin",
     "\\src",
-    "\\src\\bin",
-    "\\src\\bin\\Debug",
-    "\\src\\bin\\Debug\\net6.0-windows",
-    "\\src\\bin\\Release",
-    "\\src\\bin\\Release\\net6.0-windows"
+    "\\src\\Driver"
   ],
-  "SelectedNode": "\\src\\src.csproj",
+  "SelectedNode": "\\src\\MainWindow.xaml",
   "PreviewInSolutionExplorer": false
 }
