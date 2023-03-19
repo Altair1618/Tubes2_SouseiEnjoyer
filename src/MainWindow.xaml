@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:src"
+		xmlns:maze="clr-namespace:Mazes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 	<ScrollViewer HorizontalScrollBarVisibility="Auto">
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100*"/>
-				<ColumnDefinition Width="359*"/>
+				<ColumnDefinition Width="300"/>
+				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<Border Background="Black" />
 			<Border Background="DarkGray" Grid.Row="0" Grid.Column="1" />
@@ -68,6 +69,13 @@
 					</Button.Resources>
 					VISUALIZE
 				</Button>
+			</StackPanel>
+			<StackPanel Name="mazePanel" 
+						Grid.Column="1"
+						Orientation="Vertical"
+						VerticalAlignment="Center">
+				
+			
 			</StackPanel>
 		</Grid>
 	</ScrollViewer>

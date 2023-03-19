@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
-
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 namespace Mazes {
     public class Maze {
         // Attributes
@@ -29,6 +31,11 @@ namespace Mazes {
             } else {
                 return MazeLayout[0].Count;
             }
+        }
+
+        public Tile GetTile(int row, int col)
+        {
+            return MazeLayout[row][col];
         }
 
         private int GetTreasureCount() {
@@ -155,5 +162,6 @@ namespace Mazes {
             }
             return result;
         }
+
     }
 }

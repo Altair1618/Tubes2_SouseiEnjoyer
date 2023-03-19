@@ -25,13 +25,14 @@ C:\Users\USER\Documents\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.pd
 C:\Users\USER\Documents\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.genruntimeconfig.cache
 C:\Users\USER\Documents\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\ref\src.dll
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.AssemblyReference.cache
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\MazeView.baml
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\TileView.baml
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\MazeView.g.cs
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\TileView.g.cs
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.lref
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.dll
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\refint\src.dll
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.pdb
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.exe
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.deps.json
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.runtimeconfig.json
@@ -43,5 +44,8 @@ C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-wi
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.AssemblyInfoInputs.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.AssemblyInfo.cs
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.dll
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\refint\src.dll
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.pdb
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.genruntimeconfig.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\ref\src.dll
