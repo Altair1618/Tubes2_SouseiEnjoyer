@@ -4,7 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-namespace Mazes
+using Mazes;
+namespace Views
 {
     public partial class MazeView : Grid
     {

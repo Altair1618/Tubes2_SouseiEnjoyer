@@ -4,7 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-namespace Mazes
+using Mazes;
+namespace Views
 {
     public partial class TileView : Border
     {
@@ -22,7 +23,7 @@ namespace Mazes
                 tileBorder.Background = new SolidColorBrush(Colors.White);
             }
 
-            if (tile.IsTreasure())
+            if (tile.IsTreasure() || tile.IsStartingPoint())
             {
                 // Create Image Element
                 Border b2 = new Border();
@@ -31,7 +32,15 @@ namespace Mazes
                 BitmapImage myBitmapImage = new BitmapImage();
 
                 myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("../../src/assets/treasure.png", UriKind.Relative);
+                string uri = "";
+                if (tile.IsTreasure())
+                {
+                    uri = "../../src/assets/treasure.png";
+                } else if (tile.IsStartingPoint())
+                {
+                    uri = "../../src/assets/start.png";
+                }
+                myBitmapImage.UriSource = new Uri(uri, UriKind.Relative);
 
                 myBitmapImage.DecodePixelWidth = 40;
                 myBitmapImage.EndInit();
