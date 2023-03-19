@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\App.xaml
-3538503786
+31647132662
 
-91442415167
+9-581724341
 194-1251378414
-MainWindow.xaml;Mazes\MazeView.xaml;Mazes\TileView.xaml;
+MainWindow.xaml;Views\MazeView.xaml;Views\TileView.xaml;
 
 False
 
