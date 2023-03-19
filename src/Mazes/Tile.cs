@@ -1,9 +1,3 @@
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
 namespace Mazes {
     public class Tile {
         // Attributes
@@ -28,7 +22,6 @@ namespace Mazes {
             tileCount++;
         }
 
-<<<<<<< HEAD
         public bool IsStartingPoint() {
             return Category == 'K';
         }
@@ -45,7 +38,5 @@ namespace Mazes {
         {
             return Category;
         }
-=======
->>>>>>> 175eb57 (add: maze and tile view)
     }
 }

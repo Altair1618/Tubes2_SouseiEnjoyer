@@ -13,11 +13,7 @@ namespace Mazes
             InitializeComponent();
 
             tileBorder.SetValue(Border.CornerRadiusProperty, new CornerRadius(10));
-<<<<<<< HEAD
             if (!tile.IsWalkable())
-=======
-            if (tile.Category == 'X')
->>>>>>> 175eb57 (add: maze and tile view)
             {
                 tileBorder.Background = new SolidColorBrush(Colors.Black);
             }
@@ -26,11 +22,7 @@ namespace Mazes
                 tileBorder.Background = new SolidColorBrush(Colors.White);
             }
 
-<<<<<<< HEAD
             if (tile.IsTreasure())
-=======
-            if (tile.Category == 'T')
->>>>>>> 175eb57 (add: maze and tile view)
             {
                 // Create Image Element
                 Border b2 = new Border();

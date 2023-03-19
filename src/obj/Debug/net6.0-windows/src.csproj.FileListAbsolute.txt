@@ -41,15 +41,6 @@ C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.runtimeconfig.json
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.dll
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.pdb
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.AssemblyReference.cache
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\MazeView.baml
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\TileView.baml
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.g.cs
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\MazeView.g.cs
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Mazes\TileView.g.cs
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\App.g.cs
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.cache
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.lref
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.g.resources
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.GeneratedMSBuildEditorConfig.editorconfig
