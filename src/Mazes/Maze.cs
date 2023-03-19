@@ -9,11 +9,13 @@ namespace Mazes {
         }
 
         private int treasureCount;
+        private HashSet <Tile> treasureTiles;
 
         // Constructor
         public Maze() {
             MazeLayout = new List<List<Tile>>();
             treasureCount = -1;
+            treasureTiles = new HashSet<Tile>();
         }
 
         // Methods
@@ -35,9 +37,9 @@ namespace Mazes {
                 foreach (var rowTile in MazeLayout) {
                     foreach (var tile in rowTile) {
                         if (tile.IsTreasure()) treasureCount++;
+                        }
                     }
                 }
-            }
 
             return treasureCount;
         }
@@ -80,6 +82,78 @@ namespace Mazes {
             }
 
             return s;
+        }
+    
+        public Tuple<Tile, string> BFS(Tile startingTile) {
+            // Queue to store tiles
+            Queue<Tuple<Tile, string>> q = new Queue<Tuple<Tile, string>>();
+            q.Enqueue(Tuple.Create(startingTile, ""));
+
+            // Dictionary to store visited tiles
+            Dictionary<Tile, bool> visited = new Dictionary<Tile, bool>();
+            foreach (var rowTile in MazeLayout) {
+                foreach (var tile in rowTile) {
+                    visited.Add(tile, false);
+                }
+            }
+
+            while (q.Count > 0) {
+                Tuple<Tile, string> currentTile = q.Dequeue();
+                Tuple<int, int> currTileCoor = GetTileCoordinate(currentTile.Item1);
+                int x = currTileCoor.Item1;
+                int y = currTileCoor.Item2;
+                Console.WriteLine("Current Tile: " + currentTile.Item1.Id + " " + currentTile.Item2);
+
+                if (currentTile.Item1.IsTreasure() && !this.treasureTiles.Contains(currentTile.Item1)) {
+                    this.treasureTiles.Add(currentTile.Item1);
+                    Console.WriteLine("Found: " + currentTile.Item1.Id + " " + currentTile.Item2 + " \n---------------------");
+                    return currentTile;
+                }
+
+                // Up
+                if (IsIndexValid(x - 1, y) && MazeLayout[x - 1][y].IsWalkable() && !visited[MazeLayout[x - 1][y]]) {
+                    Tile newTile = MazeLayout[x - 1][y];
+                    visited[newTile] = true;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "U"));
+                }
+
+                // Left
+                if (IsIndexValid(x, y - 1) && MazeLayout[x][y - 1].IsWalkable() && !visited[MazeLayout[x][y - 1]]) {
+                    Tile newTile = MazeLayout[x][y - 1];
+                    visited[newTile] = true;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "L"));
+                }
+
+                // Right
+                if (IsIndexValid(x, y + 1) && MazeLayout[x][y + 1].IsWalkable() && !visited[MazeLayout[x][y + 1]]) {
+                    Tile newTile = MazeLayout[x][y + 1];
+                    visited[newTile] = true;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "R"));
+                }
+
+                // Down
+                if (IsIndexValid(x + 1, y) && MazeLayout[x + 1][y].IsWalkable() && !visited[MazeLayout[x + 1][y]]) {
+                    Tile newTile = MazeLayout[x + 1][y];
+                    visited[newTile] = true;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "D"));
+                }
+            }
+
+            // No treasure found
+            Console.WriteLine("No treasure found");
+            return Tuple.Create(new Tile(), "");
+        }
+
+        public List< Tuple< Tile, string>> BFS (Tile startingTile, int trCount) {
+            List <Tuple <Tile,string>> result = new List<Tuple<Tile, string>>();
+            Tile start = GetStartingTile();
+            for (int i = 0; i < trCount; i++) {
+
+                Tuple <Tile, string> temp = BFS(start);
+                result.Add(temp);
+                start = temp.Item1;
+            }
+            return result;
         }
     }
 }
