@@ -15,9 +15,12 @@ namespace Mazes {
             get; private set;
         }
 
+        public string BFSRoute {
+            get; private set;
+        }
         private int treasureCount;
         private HashSet <Tile> treasureTiles;
-
+        
         // Constructor
         public Maze() {
             MazeLayout = new List<List<Tile>>();
@@ -25,6 +28,7 @@ namespace Mazes {
             BFSsteps = 0;
             BFSnodes = 0;
             treasureTiles = new HashSet<Tile>();
+            BFSRoute = "";
         }
 
         // Methods
@@ -126,6 +130,7 @@ namespace Mazes {
                     this.treasureTiles.Add(currentTile.Item1);
                     Tuple <Tuple<Tile, string>, List<Tile>> result = Tuple.Create(currentTile, path);
                     BFSsteps += currentTile.Item2.Length;
+                    BFSRoute += currentTile.Item2;
                     BFSnodes += visitedCount;
                     Console.WriteLine("BFSnodes: " + BFSnodes);
                     return result;
@@ -192,5 +197,36 @@ namespace Mazes {
             return result;
         }
 
+        public List<Tile> GetFinalPath() {
+            List<Tile> ret = new List<Tile>();
+            Tile start = GetStartingTile();
+            Tuple<int, int> Coor = GetTileCoordinate(start);
+            int x = Coor.Item1;
+            int y = Coor.Item2;
+            Console.WriteLine("Start: " + start.Id);
+            Console.WriteLine(" x: " + x + " y: " + y);
+            string Route = BFSRoute;
+            foreach (var r in Route) {
+                if (r == 'U') {
+                    Tile newTile = MazeLayout[x - 1][y];
+                    x--;
+                    ret.Add(newTile);
+                } else if (r == 'L') {
+                    Tile newTile = MazeLayout[x][y - 1];
+                    y--;
+                    ret.Add(newTile);
+                } else if (r == 'R') {
+                    Tile newTile = MazeLayout[x][y+1];
+                    y++;
+                    ret.Add(newTile);
+                } else {
+                    Tile newTile = MazeLayout[x + 1][y];
+                    x++;
+                    ret.Add(newTile);
+                }
+            }
+
+            return ret; 
+        }
     }
 }
