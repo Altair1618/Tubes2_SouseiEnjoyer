@@ -19,8 +19,10 @@ namespace Drivers {
             FileReader fileReader = new FileReader();
             Maze maze = fileReader.read("../../test/test2.txt");
             // Tuple<Tile, string> result = maze.BFS(maze.GetStartingTile());
-            List<Tuple<Tile, string>> results = maze.BFS(maze.GetStartingTile(), 3);
-            
+            // List<Tuple<Tile, string>> results = maze.BFS(maze.GetStartingTile());
+            List <Tuple <Tuple<Tile, string>, List<Tile>>> result = maze.BFS(maze.GetStartingTile());
+            Console.WriteLine("Steps: " + maze.BFSsteps);
+            Console.WriteLine("Nodes: " + maze.BFSnodes);
         }
     }
 }
