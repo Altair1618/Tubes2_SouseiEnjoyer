@@ -21,8 +21,15 @@ namespace Drivers {
             // Tuple<Tile, string> result = maze.BFS(maze.GetStartingTile());
             // List<Tuple<Tile, string>> results = maze.BFS(maze.GetStartingTile());
             List <Tuple <Tuple<Tile, string>, List<Tile>>> result = maze.BFS(maze.GetStartingTile());
+            // Console.WriteLine("Route: " + maze.BFSRoute);
             Console.WriteLine("Steps: " + maze.BFSsteps);
             Console.WriteLine("Nodes: " + maze.BFSnodes);
+            Console.WriteLine("Route: " + maze.BFSRoute ) ;
+            List<Tile> finalPath = maze.GetFinalPath();
+            foreach (var tile in finalPath) {
+                Console.WriteLine(tile.Id);
+            }
+            
         }
     }
 }
