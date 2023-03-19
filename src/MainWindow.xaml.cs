@@ -41,7 +41,11 @@ namespace src
                 filename.Text = openFileDialog.SafeFileName;
                 FileReader fileReader = new FileReader();
                 maze = fileReader.read(openFileDialog.FileName);
+<<<<<<< HEAD
                 foreach (var row in maze.MazeLayout)
+=======
+                foreach (var row in maze.maze)
+>>>>>>> 175eb57 (add: maze and tile view)
                 {
                     foreach(var col in row)
                     {
@@ -57,8 +61,12 @@ namespace src
             }
 
             MazeView mazeGrid = new MazeView(maze);
+<<<<<<< HEAD
             mazeGrid.Width = maze.GetCol() * 100;
             mazeGrid.Height = maze.GetRow() * 100;
+=======
+            mazeGrid.Width = maze.maze.Count * 100;
+>>>>>>> 175eb57 (add: maze and tile view)
             mazePanel.Children.Add(mazeGrid);
         }
 

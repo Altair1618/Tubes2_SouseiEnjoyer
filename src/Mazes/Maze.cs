@@ -20,6 +20,7 @@ namespace Mazes {
             treasureTiles = new HashSet<Tile>();
         }
 
+<<<<<<< HEAD
         // Methods
         public int GetRow() {
             return MazeLayout.Count;
@@ -163,5 +164,7 @@ namespace Mazes {
             return result;
         }
 
+=======
+>>>>>>> 175eb57 (add: maze and tile view)
     }
 }
