@@ -7,9 +7,7 @@ namespace Mazes {
             get; private set;
         }
 
-        public char Category {
-            get; private set;
-        }
+        private char Category;
 
         // Constructor
         public Tile() {
@@ -22,6 +20,18 @@ namespace Mazes {
             this.Id = tileCount + 1;
             this.Category = Category;
             tileCount++;
+        }
+
+        public bool IsStartingPoint() {
+            return Category == 'K';
+        }
+
+        public bool IsTreasure() {
+            return Category == 'T';
+        }
+
+        public bool IsWalkable() {
+            return (Category == 'K' || Category == 'R' || Category == 'T');
         }
     }
 }
