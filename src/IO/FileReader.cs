@@ -21,7 +21,7 @@ namespace IO
                 while ((line = sr.ReadLine()) != null)
                 {
                     List<Tile> tiles = convertLine(line);
-                    maze.maze.Add(tiles);
+                    maze.MazeLayout.Add(tiles);
                 }
             }
             return maze;

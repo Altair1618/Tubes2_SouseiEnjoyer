@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <Compile Include="../Mazes/*.cs" />
+        <Compile Include="../IO/*.cs" />
     </ItemGroup>
   
 </Project>
