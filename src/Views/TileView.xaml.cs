@@ -14,13 +14,13 @@ namespace Views
             InitializeComponent();
 
             tileBorder.SetValue(Border.CornerRadiusProperty, new CornerRadius(10));
-            if (!tile.IsWalkable())
+            if (tile.IsWalkable() || tile.IsStartingPoint()) 
             {
-                tileBorder.Background = new SolidColorBrush(Colors.Black);
+                tileBorder.Background = new SolidColorBrush(Colors.LightGray);
             }
             else
             {
-                tileBorder.Background = new SolidColorBrush(Colors.DarkGray);
+                tileBorder.Background = new SolidColorBrush(Colors.Black);
             }
 
             if (tile.IsTreasure() || tile.IsStartingPoint())

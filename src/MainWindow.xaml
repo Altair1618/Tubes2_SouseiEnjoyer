@@ -46,14 +46,14 @@
 							FontSize="16">
 						Algoritma
 					</Label>
-					<RadioButton Foreground="White" FontSize="16" VerticalContentAlignment="Center">BFS</RadioButton>
-					<RadioButton Foreground="White" FontSize="16" VerticalContentAlignment="Center">DFS</RadioButton>
+					<RadioButton Name="BFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">BFS</RadioButton>
+					<RadioButton Name="DFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">DFS</RadioButton>
 				</StackPanel>
 				<StackPanel Margin="0 20">
 					<TextBlock Text="Time in between"
 								Foreground="White"
 								FontSize="16" />
-					<Slider Maximum="100" TickPlacement="BottomRight" TickFrequency="10" />
+					<Slider Maximum="5" TickPlacement="BottomRight" TickFrequency="5" />
 				</StackPanel>
 				<StackPanel Margin="0 20">
 					<TextBlock  Name="route"
@@ -74,7 +74,7 @@
 								FontSize="16" />
 				</StackPanel>
 				<Button Name="search"
-						Background="Aqua"
+						Background="SkyBlue"
 						Padding="0 8"
 						FontSize="16"
 						VerticalAlignment="Bottom"
@@ -90,7 +90,7 @@
 					SEARCH
 				</Button>
 				<Button Name="visualize"
-						Background="Aqua"
+						Background="SkyBlue"
 						Padding="0 8"
 						FontSize="16"
 						VerticalAlignment="Bottom"

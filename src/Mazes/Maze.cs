@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mazes {
     public class Maze {
@@ -48,6 +49,11 @@ namespace Mazes {
             } else {
                 return MazeLayout[0].Count;
             }
+        }
+
+        public int GetFirstId()
+        {
+            return MazeLayout[0][0].Id;
         }
 
         public Tile GetTile(int row, int col)

@@ -27,7 +27,9 @@ namespace src
     {
         private Maze maze;
         private MazeView mazeView;
-        List<Tuple<Tuple<Tile, string>, List<Tile>>> result;
+        List<Tile> processTiles;
+        List<Tile> finalPath;
+        private string algorithm;
         public MainWindow()
         {
             this.maze = new Maze();
@@ -37,6 +39,7 @@ namespace src
 
         public void openFileButton(object sender, RoutedEventArgs e)
         {
+            this.resetState();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
@@ -52,70 +55,117 @@ namespace src
                     }
                     Trace.WriteLine("");
                 }
+                if (mazePanel.Children.Count > 0)
+                {
+                    mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
+                }
+
+                mazeView = new MazeView(maze);
+                mazeView.Width = maze.GetCol() * 100;
+                mazeView.Height = maze.GetRow() * 100;
+                mazePanel.Children.Add(mazeView);
             }
 
-            if (mazePanel.Children.Count > 0)
-            {
-                mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
-            }
-
-            mazeView = new MazeView(maze);
-            mazeView.Width = maze.GetCol() * 100;
-            mazeView.Height = maze.GetRow() * 100;
-            mazePanel.Children.Add(mazeView);
-            search.IsEnabled = true;
         }
 
-        public void searchButton(object sender, RoutedEventArgs e)
+        public async void searchButton(object sender, RoutedEventArgs e)
         {
-            result = maze.BFS(maze.GetStartingTile());
-            visualize.IsEnabled = true;
-            nodes.Text += maze.BFSnodes.ToString();
-            steps.Text += maze.BFSsteps.ToString();
-            for (int i = 0; i < result.Count; i++)
+            this.resetState();
+            mazeView.Reset();
+            search.IsEnabled = true;
+            if (algorithm == "BFS")
             {
-                route.Text += result[i].Item1.Item2;
+                maze.BFS(maze.GetStartingTile());
+                processTiles = maze.processRoute;
+                finalPath = maze.GetFinalPath();
+                nodes.Text += maze.BFSnodes.ToString();
+                steps.Text += maze.BFSsteps.ToString();
+                route.Text += maze.BFSRoute;
+                visualize.IsEnabled = true;
+            } else if (algorithm == "DFS")
+            {
+                processTiles = maze.DFS();
+                visualize.IsEnabled = true;
+                nodes.Text += processTiles.Count.ToString();
+                steps.Text += processTiles.Distinct().Count().ToString();
             }
-            mazeView.ShowResult(result);
         }
 
         public async void visualizeButton(object sender, RoutedEventArgs e)
         {
             search.IsEnabled = false;
             visualize.IsEnabled = false;
-            mazeView.Reset();
-            if (mazePanel.Children.Count > 0)
+
+            await mazeView.ShowProgress(processTiles);
+            if (algorithm == "BFS")
             {
-                Grid mazeGrid = mazePanel.Children[0] as Grid;
-                for (int i = 0; i < result.Count; i++)
+                await mazeView.ShowFinalPath(finalPath);
+            }
+            replay.IsEnabled = true;
+            /*if (algorithm == "DFS")
+            {
+            } else if (algorithm == "BFS")
+            {
+                mazeView.Reset();
+                if (mazePanel.Children.Count > 0)
                 {
-                    for (int j = 0; j < result[i].Item2.Count; j++)
+                    Grid mazeGrid = mazePanel.Children[0] as Grid;
+                    for (int i = 0; i < result.Count; i++)
                     {
-                        Tuple<int, int> coordinate = maze.GetTileCoordinate(result[i].Item2[j]);
-                        Trace.WriteLine(result[i].Item2[j].Id);
-                        await Task.Delay(1000);
-                        Border tileBorder = mazeGrid.Children[result[i].Item2[j].Id - 1] as Border;
-                        if (j > 0)
+                        for (int j = 0; j < result[i].Item2.Count; j++)
                         {
-                            Tuple<int, int> prevCoordinate = maze.GetTileCoordinate(result[i].Item2[j-1]);
-                            Border prevTileBorder = mazeGrid.Children[result[i].Item2[j-1].Id - 1] as Border;
-                            SolidColorBrush color = new SolidColorBrush(Colors.Yellow);
-                            color.Opacity = 0.1 * (maze.MazeLayout[prevCoordinate.Item1][prevCoordinate.Item2].Visited);
-                            prevTileBorder.Background = color;
+                            if (i > 0 && j == 0)
+                            {
+                                continue;
+                            }
+                            Tuple<int, int> coordinate = maze.GetTileCoordinate(result[i].Item2[j]);
+                            // Trace.WriteLine(result[i].Item2[j].Id);
+                            await Task.Delay(1000);
+                            Border tileBorder = mazeGrid.Children[result[i].Item2[j].Id - maze.MazeLayout[0][0].Id] as Border;
+                            if (j > 0)
+                            {
+                                Tuple<int, int> prevCoordinate = maze.GetTileCoordinate(result[i].Item2[j-1]);
+                                Border prevTileBorder = mazeGrid.Children[result[i].Item2[j-1].Id - maze.MazeLayout[0][0].Id] as Border;
+                                SolidColorBrush color = new SolidColorBrush(Colors.Goldenrod);
+                                color.Opacity = 0.15 * (maze.MazeLayout[prevCoordinate.Item1][prevCoordinate.Item2].Visited);
+                                prevTileBorder.Background = color;
+                            }
+                            maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited++;
+                            tileBorder.Background = new SolidColorBrush(Colors.SkyBlue);
                         }
-                        maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited++;
-                        tileBorder.Background = new SolidColorBrush(Colors.Aqua);
                     }
                 }
-            }
-
-            replay.IsEnabled = true;
+                replay.IsEnabled = true;
+            }*/
         }
 
         public void replayButton(object sender, RoutedEventArgs e)
         {
             visualize.IsEnabled = true;
             mazeView.Reset();
+        }
+
+        public void setAlgorithm(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb != null)
+            {
+                algorithm = rb.Content.ToString();
+                search.IsEnabled = true;
+                visualize.IsEnabled = false;
+                replay.IsEnabled = false;
+            }
+        }
+
+        public void resetState()
+        {
+            route.Text = "Route: ";
+            nodes.Text = "Nodes: ";
+            steps.Text = "Steps: ";
+            extime.Text = "Execution Time: ";
+            search.IsEnabled = false;
+            visualize.IsEnabled = false;
+            replay.IsEnabled = false;
         }
     }
 }

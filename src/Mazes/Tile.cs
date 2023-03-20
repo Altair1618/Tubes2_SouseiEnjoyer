@@ -7,7 +7,7 @@ namespace Mazes {
             get; private set;
         }
 
-        private char Category {
+        public char Category {
             get; private set;
         }
 
