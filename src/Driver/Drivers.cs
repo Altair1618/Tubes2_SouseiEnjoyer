@@ -21,18 +21,45 @@ namespace Drivers {
             // Tuple<Tile, string> result = maze.BFS(maze.GetStartingTile());
             // List<Tuple<Tile, string>> results = maze.BFS(maze.GetStartingTile());
             List <Tuple <Tuple<Tile, string>, List<Tile>>> result = maze.BFS(maze.GetStartingTile());
-            for (int i = 0; i < result.Count; i++)
-            {
-                Console.WriteLine(i);
-                Console.WriteLine(result[i].Item1.Item2);
-                for (int j = 0; j < result[i].Item2.Count; j++)
-                {
-                    Console.Write(result[i].Item2[j].Id);
-                }
-                Console.WriteLine("");
-            }
+            // Console.WriteLine("Route: " + maze.BFSRoute);
             Console.WriteLine("Steps: " + maze.BFSsteps);
             Console.WriteLine("Nodes: " + maze.BFSnodes);
+            Console.WriteLine("Route: " + maze.BFSRoute ) ;
+            List<Tile> finalPath = maze.GetFinalPath();
+            foreach (var tile in finalPath) {
+                Console.WriteLine(tile.Id);
+            }
+            
+        }
+    }
+
+    public class DFSDriver {
+        static void Main(string[] args) {
+            Maze maze = new Maze();
+            
+            // Test 1 : RRRDDLL
+            // string input = "KRRRXRXTXTRRXRXX";
+            // int row = 4; int col = 4;
+
+            // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
+            string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
+            int row = 5, col = 6;
+
+            // Test 3 : RRRLLDD
+            // string input = "KRRTXRXXXTXX";
+            // int row = 3, col = 4;
+            
+            int index = 0;
+            for (int i = 0; i < row; i++) {
+                maze.MazeLayout.Add(new List<Tile>());
+                for (int j = 0; j < col; j++) {
+                    maze.MazeLayout[i].Add(new Tile(input[index++]));
+                }
+            }
+            maze.UpdateTreasureCount();
+            
+            string s = maze.DFS();
+            Console.WriteLine(s);
         }
     }
 }

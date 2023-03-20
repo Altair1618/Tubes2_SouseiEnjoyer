@@ -48,7 +48,7 @@ namespace src
                 {
                     foreach(var col in row)
                     {
-                        Trace.Write(col.GetCategory() + " ");
+                        Trace.Write(col.Category + " ");
                     }
                     Trace.WriteLine("");
                 }

@@ -7,7 +7,9 @@ namespace Mazes {
             get; private set;
         }
 
-        private char Category;
+        private char Category {
+            get; private set;
+        }
 
         public int Visited
         {
@@ -38,12 +40,7 @@ namespace Mazes {
         }
 
         public bool IsWalkable() {
-            return (Category == 'K' || Category == 'R' || Category == 'T');
-        }
-
-        public char GetCategory()
-        {
-            return Category;
+            return (Category == 'R' || Category == 'T');
         }
     }
 }

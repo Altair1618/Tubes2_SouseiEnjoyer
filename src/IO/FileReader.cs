@@ -24,6 +24,7 @@ namespace IO
                     maze.MazeLayout.Add(tiles);
                 }
             }
+            maze.UpdateTreasureCount();
             return maze;
         }
 
