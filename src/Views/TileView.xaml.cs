@@ -13,7 +13,7 @@ namespace Views
         {
             InitializeComponent();
 
-            tileBorder.SetValue(Border.CornerRadiusProperty, new CornerRadius(10));
+            // tileBorder.SetValue(Border.CornerRadiusProperty, new CornerRadius(10));
             if (tile.IsWalkable() || tile.IsStartingPoint()) 
             {
                 tileBorder.Background = new SolidColorBrush(Colors.LightGray);

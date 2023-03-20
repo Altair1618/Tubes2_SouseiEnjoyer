@@ -50,10 +50,24 @@
 					<RadioButton Name="DFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">DFS</RadioButton>
 				</StackPanel>
 				<StackPanel Margin="0 20">
-					<TextBlock Text="Time in between"
-								Foreground="White"
-								FontSize="16" />
-					<Slider Maximum="5" TickPlacement="BottomRight" TickFrequency="5" />
+					<DockPanel VerticalAlignment="Center">
+						<TextBlock Text="Time in between"
+									Foreground="White"
+									FontSize="16" />
+						<TextBox Text="{Binding ElementName=timeDelaySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+								 Background="Black"
+								 Foreground="White"
+								 DockPanel.Dock="Right" 
+								 TextAlignment="Right"
+								 BorderThickness="0"/>
+					</DockPanel>
+					<Slider Minimum="100" 
+							Maximum="1000" 
+							Name="timeDelaySlider" 
+							IsSnapToTickEnabled="True" 
+							TickPlacement="BottomRight" 
+							TickFrequency="100"
+							ValueChanged="setTimeDelay"/>
 				</StackPanel>
 				<StackPanel Margin="0 20">
 					<TextBlock  Name="route"

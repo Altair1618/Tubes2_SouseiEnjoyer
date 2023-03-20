@@ -72,6 +72,17 @@ namespace Mazes {
             }
         }
 
+        public void ResetVisitedTiles()
+        {
+            foreach (var rowTile in MazeLayout)
+            {
+                foreach (var tile in rowTile)
+                {
+                    tile.Visited = 0;
+                }
+            }
+        }
+
         private bool IsIndexValid(int row, int col) {
             return (row >= 0 && row < GetRow() && col >= 0 && col < GetCol());
         }

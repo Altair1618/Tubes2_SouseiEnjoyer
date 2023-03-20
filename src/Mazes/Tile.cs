@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace Mazes {
     public class Tile {
         // Attributes
@@ -27,6 +29,10 @@ namespace Mazes {
         public Tile(char Category) {
             this.Id = tileCount + 1;
             this.Category = Category;
+            if (Category != 'K' || Category != 'X' || Category != 'T' || Category != 'R')
+            {
+                throw new FileFormatException();
+            }
             this.Visited = 0;
             tileCount++;
         }

@@ -11,29 +11,30 @@ namespace Views
     public partial class MazeView : Grid
     {
         private Maze maze;
-        public MazeView(Maze maze)
+        public MazeView(Maze maze, int tileSize = 100)
         {
             this.maze = maze;
             InitializeComponent();
-            this.Visualize();
+            this.Visualize(tileSize);
         }
 
-        public void Visualize()
+        public void Visualize(int tileSize = 100)
         {
             for (int i = 0; i < maze.GetRow(); i++)
             {
                 RowDefinition row = new RowDefinition();
-                row.Height = new GridLength(100);
+                row.Height = new GridLength(tileSize);
 
                 mazeGrid.RowDefinitions.Add(row);
                 for (int j = 0; j < maze.GetCol(); j++)
                 {
                     // maze.maze[i][j].visualize(mazeGrid, i, j);
                     ColumnDefinition column = new ColumnDefinition();
-                    column.Width = new GridLength(100);
+                    column.Width = new GridLength(tileSize);
                     mazeGrid.ColumnDefinitions.Add(column);
 
                     TileView tileView = new TileView(maze.GetTile(i, j));
+                    tileView.SetValue(Border.CornerRadiusProperty, new CornerRadius(tileSize / 10));
                     mazeGrid.Children.Add(tileView);
 
                     Grid.SetRow(tileView, i);
@@ -45,12 +46,11 @@ namespace Views
 
         public void Reset()
         {
-            
+            maze.ResetVisitedTiles();
             for (int i = 0; i < maze.GetRow(); i++)
             {
                 for (int j = 0; j < maze.GetCol(); j++)
                 {
-                    maze.MazeLayout[i][j].Visited = 0;
                     if (maze.MazeLayout[i][j].IsWalkable() || maze.MazeLayout[i][j].IsStartingPoint())
                     {
                         if (mazeGrid.Children[maze.MazeLayout[i][j].Id - maze.MazeLayout[0][0].Id] != null)
@@ -63,25 +63,31 @@ namespace Views
             }
         }
 
-        public async Task ShowFinalPath(List<Tile> finalPath)
+        public async Task ShowFinalPath(List<Tile> finalPath, int timeDelay=100)
         {
+            maze.ResetVisitedTiles();
             for (int i = 0; i < finalPath.Count; i++)
             {
+                Tuple<int, int> coordinate = maze.GetTileCoordinate(finalPath[i]);
+                maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited++;
                 int tileId = finalPath[i].Id - maze.GetFirstId();
                 Border tile = mazeGrid.Children[tileId] as Border;
-                tile.Background = new SolidColorBrush(Colors.LightGreen);
-                await Task.Delay(500);
+                // tile.Background = new SolidColorBrush(Colors.LightGreen);
+                SolidColorBrush color = new SolidColorBrush(Colors.LightGreen);
+                color.Opacity = 0.3 * (maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited);
+                tile.Background = color;
+                await Task.Delay(timeDelay);
             }
         }
 
-        public async Task ShowProgress(List<Tile> progressTile)
+        public async Task ShowProgress(List<Tile> progressTile, int timeDelay=100)
         {
             this.Reset();
             for (int i = 0; i < progressTile.Count; i++)
             {
                 Tuple<int, int> coordinate = maze.GetTileCoordinate(progressTile[i]);
                 // Trace.WriteLine(result[i].Item2[j].Id);
-                await Task.Delay(1000);
+                await Task.Delay(timeDelay);
                 int tileId = progressTile[i].Id - maze.GetFirstId();
                 Border tile = mazeGrid.Children[tileId] as Border;
                 if (i > 0)

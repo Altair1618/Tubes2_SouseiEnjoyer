@@ -30,6 +30,7 @@ namespace src
         List<Tile> processTiles;
         List<Tile> finalPath;
         private string algorithm;
+        private int timeDelay = 100;
         public MainWindow()
         {
             this.maze = new Maze();
@@ -44,26 +45,41 @@ namespace src
             openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                filename.Text = openFileDialog.SafeFileName;
-                FileReader fileReader = new FileReader();
-                maze = fileReader.read(openFileDialog.FileName);
-                foreach (var row in maze.MazeLayout)
+                try
                 {
-                    foreach(var col in row)
+                    filename.Text = openFileDialog.SafeFileName;
+                    FileReader fileReader = new FileReader();
+                    maze = fileReader.read(openFileDialog.FileName);
+                    foreach (var row in maze.MazeLayout)
                     {
-                        Trace.Write(col.Category + " ");
+                        foreach(var col in row)
+                        {
+                            Trace.Write(col.Category + " ");
+                        }
+                        Trace.WriteLine("");
                     }
-                    Trace.WriteLine("");
-                }
-                if (mazePanel.Children.Count > 0)
-                {
-                    mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
-                }
+                    if (mazePanel.Children.Count > 0)
+                    {
+                        mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
+                    }
 
-                mazeView = new MazeView(maze);
-                mazeView.Width = maze.GetCol() * 100;
-                mazeView.Height = maze.GetRow() * 100;
-                mazePanel.Children.Add(mazeView);
+                    int tileSize = Math.Min(100, (int)mazePanel.ActualWidth / maze.GetRow());
+                    mazeView = new MazeView(maze, tileSize);
+                    mazeView.Width = maze.GetCol() * tileSize;
+                    mazeView.Height = maze.GetRow() * tileSize;
+                    mazePanel.Children.Add(mazeView);
+
+                    if (algorithm != null)
+                    {
+                        search.IsEnabled = true;
+                    }
+
+                } catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.ToString());
+                    MessageBox.Show("Invalid file format");
+                    filename.Text = "-";
+                }
             }
 
         }
@@ -72,7 +88,7 @@ namespace src
         {
             this.resetState();
             mazeView.Reset();
-            search.IsEnabled = true;
+            // search.IsEnabled = true;
             if (algorithm == "BFS")
             {
                 maze.BFS(maze.GetStartingTile());
@@ -85,23 +101,27 @@ namespace src
             } else if (algorithm == "DFS")
             {
                 processTiles = maze.DFS();
+                finalPath = processTiles;
                 visualize.IsEnabled = true;
                 nodes.Text += processTiles.Count.ToString();
                 steps.Text += processTiles.Distinct().Count().ToString();
             }
+
+            search.IsEnabled = false;
         }
 
         public async void visualizeButton(object sender, RoutedEventArgs e)
         {
-            search.IsEnabled = false;
+            mazeView.Reset();
             visualize.IsEnabled = false;
+            inputfile.IsEnabled = false;
 
-            await mazeView.ShowProgress(processTiles);
-            if (algorithm == "BFS")
-            {
-                await mazeView.ShowFinalPath(finalPath);
-            }
-            replay.IsEnabled = true;
+            await mazeView.ShowProgress(processTiles, timeDelay);
+            await Task.Delay(100);
+            await mazeView.ShowFinalPath(finalPath, timeDelay);
+
+            visualize.IsEnabled = true;
+            inputfile.IsEnabled = true;
             /*if (algorithm == "DFS")
             {
             } else if (algorithm == "BFS")
@@ -166,6 +186,11 @@ namespace src
             search.IsEnabled = false;
             visualize.IsEnabled = false;
             replay.IsEnabled = false;
+        }
+
+        public void setTimeDelay(object sender, RoutedEventArgs e)
+        {
+            timeDelay = (int) timeDelaySlider.Value;
         }
     }
 }
