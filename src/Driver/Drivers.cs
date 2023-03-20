@@ -58,8 +58,12 @@ namespace Drivers {
             }
             maze.UpdateTreasureCount();
             
-            string s = maze.DFS();
-            Console.WriteLine(s);
+            List<Tile> list = maze.DFS();
+            
+            Console.WriteLine("Output:");
+            foreach (var item in list) {
+                Console.WriteLine(maze.GetTileCoordinate(item));
+            }
         }
     }
 }
