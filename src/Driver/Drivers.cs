@@ -32,4 +32,34 @@ namespace Drivers {
             
         }
     }
+
+    public class DFSDriver {
+        static void Main(string[] args) {
+            Maze maze = new Maze();
+            
+            // Test 1 : RRRDDLL
+            // string input = "KRRRXRXTXTRRXRXX";
+            // int row = 4; int col = 4;
+
+            // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
+            // string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
+            // int row = 5, col = 6;
+
+            // Test 3 : RRRLLDD
+            string input = "KRRTXRXXXTXX";
+            int row = 3, col = 4;
+            
+            int index = 0;
+            for (int i = 0; i < row; i++) {
+                maze.MazeLayout.Add(new List<Tile>());
+                for (int j = 0; j < col; j++) {
+                    maze.MazeLayout[i].Add(new Tile(input[index++]));
+                }
+            }
+            maze.UpdateTreasureCount();
+            
+            string s = maze.DFS();
+            Console.WriteLine(s);
+        }
+    }
 }

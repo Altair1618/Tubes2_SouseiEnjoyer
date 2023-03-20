@@ -49,17 +49,15 @@ namespace Mazes {
             return MazeLayout[row][col];
         }
 
-        private int GetTreasureCount() {
+        public void UpdateTreasureCount() {
             if (treasureCount == -1) {
                 treasureCount = 0;
                 foreach (var rowTile in MazeLayout) {
                     foreach (var tile in rowTile) {
                         if (tile.IsTreasure()) treasureCount++;
-                        }
                     }
                 }
-
-            return treasureCount;
+            }
         }
 
         private bool IsIndexValid(int row, int col) {
@@ -227,6 +225,103 @@ namespace Mazes {
             }
 
             return ret; 
+        }
+
+        public string DFS() {
+            Stack<Tile> dfsStack = new Stack<Tile>();
+            var state = new Dictionary<Tile, DFSState>();
+            int visitedTreasure = 0;
+
+            string retString = "";
+
+            // Initiate state
+            foreach (var tileList in MazeLayout) {
+                foreach (var tile in tileList) {
+                    state[tile] = new DFSState(null!, "", "");
+                }
+            }
+
+            dfsStack.Push(GetStartingTile());
+
+            while (dfsStack.Count > 0) {
+                Tile currentTile = dfsStack.Pop();
+                if (currentTile.IsTreasure()) visitedTreasure++;
+                Console.WriteLine(GetTileCoordinate(currentTile));
+                Console.WriteLine(state[currentTile].Path);
+
+                (int row, int col) = GetTileCoordinate(currentTile);
+
+                int cnt = 0;
+                if (IsIndexValid(row + 1, col) && MazeLayout[row + 1][col].IsWalkable()) {
+                    if (state[MazeLayout[row + 1][col]].PrevTile == null) {
+                        dfsStack.Push(MazeLayout[row + 1][col]);
+                        string newPath = state[currentTile].Path + "D";
+                        state[MazeLayout[row + 1][col]] = new DFSState(currentTile, newPath, "D");
+                        cnt++;
+                    }
+                }
+
+                if (IsIndexValid(row, col + 1) && MazeLayout[row][col + 1].IsWalkable()) {
+                    if (state[MazeLayout[row][col + 1]].PrevTile == null) {
+                        dfsStack.Push(MazeLayout[row][col + 1]);
+                        string newPath = state[currentTile].Path + "R";
+                        state[MazeLayout[row][col + 1]] = new DFSState(currentTile, newPath, "R");
+                        cnt++;
+                    }
+                }
+
+                if (IsIndexValid(row, col - 1) && MazeLayout[row][col - 1].IsWalkable()) {
+                    if (state[MazeLayout[row][col - 1]].PrevTile == null) {
+                        dfsStack.Push(MazeLayout[row][col - 1]);
+                        string newPath = state[currentTile].Path + "L";
+                        state[MazeLayout[row][col - 1]] = new DFSState(currentTile, newPath, "L");
+                        cnt++;
+                    }
+                }
+
+                if (IsIndexValid(row - 1, col) && MazeLayout[row - 1][col].IsWalkable()) {
+                    if (state[MazeLayout[row - 1][col]].PrevTile == null) {
+                        dfsStack.Push(MazeLayout[row - 1][col]);
+                        string newPath = state[currentTile].Path + "U";
+                        state[MazeLayout[row - 1][col]] = new DFSState(currentTile, newPath, "U");
+                        cnt++;
+                    }
+                }
+
+                if (treasureCount == visitedTreasure) {
+                    retString = state[currentTile].Path;
+                    break;
+                }
+
+                if (cnt == 0 && dfsStack.Count > 0) {
+                    while (currentTile != state[dfsStack.Peek()].PrevTile) {
+                        string lastPath = state[currentTile].Path;
+                        string lastMove = state[currentTile].LastMove;
+                        currentTile = state[currentTile].PrevTile;
+                        state[currentTile].Path = lastPath + GetInversedPath(lastMove);
+                    }
+                    state[dfsStack.Peek()].Path = state[currentTile].Path + state[dfsStack.Peek()].LastMove;
+                }
+            }
+            dfsStack.Clear();
+
+            return retString;
+        }
+    }
+
+    public class DFSState {
+        // Attributes
+        // Also Mark A Visited Tile
+        // Visited Tile : PrevTile is Not Null
+        public Tile PrevTile;
+        public string Path;
+        public string LastMove;
+
+        // Constructor
+        public DFSState(Tile prev, string path, string lastMove) {
+            PrevTile = prev;
+            Path = path;
+            LastMove = lastMove;
         }
     }
 }
