@@ -42,12 +42,12 @@ namespace Drivers {
             // int row = 4; int col = 4;
 
             // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-            // string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
-            // int row = 5, col = 6;
+            string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
+            int row = 5, col = 6;
 
             // Test 3 : RRRLLDD
-            string input = "KRRTXRXXXTXX";
-            int row = 3, col = 4;
+            // string input = "KRRTXRXXXTXX";
+            // int row = 3, col = 4;
             
             int index = 0;
             for (int i = 0; i < row; i++) {
