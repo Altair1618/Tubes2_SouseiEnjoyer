@@ -42,5 +42,9 @@ namespace Mazes {
         public bool IsWalkable() {
             return (Category == 'R' || Category == 'T');
         }
+
+        public bool isWalkable() {
+            return (Category == 'R' || Category == 'T' || Category == 'K');
+        }
     }
 }

@@ -112,12 +112,12 @@ namespace Mazes {
             return s;
         }
     
-        /* BFSfind returns Tuple of a detail treasure and its process.*/
-        public Tuple <Tuple<Tile, string>, List<Tile>> BFSfind(Tile startingTile) {
-            // Queue to store 
+        public Tuple<Tile, string> BFSfind(Tile startingTile) {
+            // initialize
             List<Tile> path = new List<Tile>();
-            path.Add(startingTile);
             processRoute.Add(startingTile);
+
+            // Queue to store 
             Queue<Tuple<Tile, string>> q = new Queue<Tuple<Tile, string>>();
             q.Enqueue(Tuple.Create(startingTile, ""));
 
@@ -128,31 +128,28 @@ namespace Mazes {
                     visited.Add(tile, false);
                 }
             }
+
             visited[startingTile] = true;
             int visitedCount = 0;
             while (q.Count > 0) {
                 Tuple<Tile, string> currentTile = q.Dequeue();
                 (int x, int y) = GetTileCoordinate(currentTile.Item1);
-                
-                // Console.WriteLine("Current Tile: " + currentTile.Item1.Id + " " + currentTile.Item2);
                 path.Add(currentTile.Item1);
 
                 if (currentTile.Item1.IsTreasure() && !this.visitedTreasures.Contains(currentTile.Item1)) {
                     this.visitedTreasures.Add(currentTile.Item1);
-                    Tuple <Tuple<Tile, string>, List<Tile>> result = Tuple.Create(currentTile, path);
+                    // updating attributes
                     path.RemoveAt(path.Count-1);
-                    path.RemoveAt(0);
                     path.RemoveAt(0);
                     processRoute = processRoute.Concat(path).ToList();
                     BFSsteps += currentTile.Item2.Length;
                     BFSRoute += currentTile.Item2;
                     BFSnodes += visitedCount;
-                    Console.WriteLine("BFSnodes: " + BFSnodes);
-                    return result;
+                    return currentTile;
                 }
 
                 // Up
-                if (IsIndexValid(x - 1, y) && MazeLayout[x - 1][y].IsWalkable() && !visited[MazeLayout[x - 1][y]]) {
+                if (IsIndexValid(x - 1, y) && MazeLayout[x - 1][y].isWalkable() && !visited[MazeLayout[x - 1][y]]) {
                     Tile newTile = MazeLayout[x - 1][y];
                     visited[newTile] = true;
                     visitedCount++;
@@ -160,7 +157,7 @@ namespace Mazes {
                 }
 
                 // Left
-                if (IsIndexValid(x, y - 1) && MazeLayout[x][y - 1].IsWalkable() && !visited[MazeLayout[x][y - 1]]) {
+                if (IsIndexValid(x, y - 1) && MazeLayout[x][y - 1].isWalkable() && !visited[MazeLayout[x][y - 1]]) {
                     Tile newTile = MazeLayout[x][y - 1];
                     visited[newTile] = true;
                     visitedCount++;
@@ -168,7 +165,7 @@ namespace Mazes {
                 }
 
                 // Right
-                if (IsIndexValid(x, y + 1) && MazeLayout[x][y + 1].IsWalkable() && !visited[MazeLayout[x][y + 1]]) {
+                if (IsIndexValid(x, y + 1) && MazeLayout[x][y + 1].isWalkable() && !visited[MazeLayout[x][y + 1]]) {
                     Tile newTile = MazeLayout[x][y + 1];
                     visited[newTile] = true;
                     visitedCount++;
@@ -176,7 +173,7 @@ namespace Mazes {
                 }
 
                 // Down
-                if (IsIndexValid(x + 1, y) && MazeLayout[x + 1][y].IsWalkable() && !visited[MazeLayout[x + 1][y]]) {
+                if (IsIndexValid(x + 1, y) && MazeLayout[x + 1][y].isWalkable() && !visited[MazeLayout[x + 1][y]]) {
                     Tile newTile = MazeLayout[x + 1][y];
                     visited[newTile] = true;
                     visitedCount++;
@@ -185,36 +182,28 @@ namespace Mazes {
             }
 
             // No treasure found
-            Tuple <Tuple<Tile, string>, List<Tile>> temp = new Tuple<Tuple<Tile, string>, List<Tile>>(Tuple.Create(new Tile(), ""), new List<Tile>());
+            Tuple <Tile, string> temp = Tuple.Create(new Tile(), "");
             return temp;
         }
 
-        public List <Tuple <Tuple<Tile, string>, List<Tile>>> BFS (Tile startingTile) {
-            List <Tuple <Tuple<Tile, string>, List<Tile>>> result = new List<Tuple <Tuple<Tile, string>, List<Tile>>>();
+        public void BFS (Tile startingTile) {
+            // restart
             BFSsteps = 0;
             BFSnodes = 0;
             BFSRoute = "";
             processRoute = new List<Tile>();
             visitedTreasures = new HashSet<Tile>();
+
             Tile start = GetStartingTile();
             bool finish = false;
-            Console.WriteLine("Results: ");
             while  (!finish) {
-                Tuple <Tuple<Tile, string>, List<Tile>> temp = BFSfind(start);
-                
-                if (temp.Item1.Item2 == "") {
-                    finish = true;
+                Tuple <Tile, string> temp = BFSfind(start);
+                if (temp.Item2 == "") {
+                    finish = true; 
                 } else {
-                    result.Add(temp);
-                    start = temp.Item1.Item1;
-                    Console.WriteLine("----------------\n Result: " + temp.Item1.Item1.Id  + " " + temp.Item1.Item2 + "\n----------------\n");
+                    start = temp.Item1;
                 }
             }
-            /*print process second treasure*/
-            // foreach (var path in result[1].Item2) {
-            //     Console.WriteLine(path.Id);
-            // }
-            return result;
         }
 
         public List<Tile> GetFinalPath() {
@@ -242,7 +231,6 @@ namespace Mazes {
                     ret.Add(newTile);
                 }
             }
-
             return ret; 
         }
 

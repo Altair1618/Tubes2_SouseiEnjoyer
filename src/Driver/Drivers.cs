@@ -17,11 +17,8 @@ namespace Drivers {
     public class BFSDriver {
         static void Main(string[] args) {
             FileReader fileReader = new FileReader();
-            Maze maze = fileReader.read("../../test/test2.txt");
-            // Tuple<Tile, string> result = maze.BFS(maze.GetStartingTile());
-            // List<Tuple<Tile, string>> results = maze.BFS(maze.GetStartingTile());
-            // Console.WriteLine(maze.GetStartingTile().Id);
-            List <Tuple <Tuple<Tile, string>, List<Tile>>> result = maze.BFS(maze.GetStartingTile());
+            Maze maze = fileReader.read("../../test/test3.txt");
+            maze.BFS(maze.GetStartingTile());
             Console.WriteLine("Route: " + maze.BFSRoute);
             Console.WriteLine("Steps: " + maze.BFSsteps);
             Console.WriteLine("Nodes: " + maze.BFSnodes);
