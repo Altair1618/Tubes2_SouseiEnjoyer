@@ -20,14 +20,18 @@ namespace Drivers {
             Maze maze = fileReader.read("../../test/test2.txt");
             // Tuple<Tile, string> result = maze.BFS(maze.GetStartingTile());
             // List<Tuple<Tile, string>> results = maze.BFS(maze.GetStartingTile());
+            // Console.WriteLine(maze.GetStartingTile().Id);
             List <Tuple <Tuple<Tile, string>, List<Tile>>> result = maze.BFS(maze.GetStartingTile());
-            // Console.WriteLine("Route: " + maze.BFSRoute);
+            Console.WriteLine("Route: " + maze.BFSRoute);
             Console.WriteLine("Steps: " + maze.BFSsteps);
             Console.WriteLine("Nodes: " + maze.BFSnodes);
-            Console.WriteLine("Route: " + maze.BFSRoute ) ;
             List<Tile> finalPath = maze.GetFinalPath();
-            foreach (var tile in finalPath) {
-                Console.WriteLine(tile.Id);
+            foreach (var x in finalPath) {
+                Console.Write(x.Id + " ");
+            }
+            Console.Write("\n");
+            foreach(var x in maze.processRoute) {
+                Console.Write(x.Id + " ");
             }
             
         }

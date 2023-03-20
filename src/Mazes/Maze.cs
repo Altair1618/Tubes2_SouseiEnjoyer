@@ -18,8 +18,12 @@ namespace Mazes {
         public string BFSRoute {
             get; private set;
         }
+        public List<Tile> processRoute {
+            get; private set;
+        }
         private int treasureCount;
-        private HashSet <Tile> treasureTiles;
+        
+        private HashSet <Tile> visitedTreasures;
         
         // Constructor
         public Maze() {
@@ -27,8 +31,10 @@ namespace Mazes {
             treasureCount = -1;
             BFSsteps = 0;
             BFSnodes = 0;
-            treasureTiles = new HashSet<Tile>();
+            visitedTreasures = new HashSet<Tile>();
             BFSRoute = "";
+            processRoute = new List<Tile>();
+            // processRoute.Add(GetStartingTile());
         }
 
         // Methods
@@ -104,6 +110,8 @@ namespace Mazes {
         public Tuple <Tuple<Tile, string>, List<Tile>> BFSfind(Tile startingTile) {
             // Queue to store 
             List<Tile> path = new List<Tile>();
+            path.Add(startingTile);
+            processRoute.Add(startingTile);
             Queue<Tuple<Tile, string>> q = new Queue<Tuple<Tile, string>>();
             q.Enqueue(Tuple.Create(startingTile, ""));
 
@@ -118,15 +126,18 @@ namespace Mazes {
             int visitedCount = 0;
             while (q.Count > 0) {
                 Tuple<Tile, string> currentTile = q.Dequeue();
-                Tuple<int, int> currTileCoor = GetTileCoordinate(currentTile.Item1);
-                int x = currTileCoor.Item1;
-                int y = currTileCoor.Item2;
-                Console.WriteLine("Current Tile: " + currentTile.Item1.Id + " " + currentTile.Item2);
+                (int x, int y) = GetTileCoordinate(currentTile.Item1);
+                
+                // Console.WriteLine("Current Tile: " + currentTile.Item1.Id + " " + currentTile.Item2);
                 path.Add(currentTile.Item1);
 
-                if (currentTile.Item1.IsTreasure() && !this.treasureTiles.Contains(currentTile.Item1)) {
-                    this.treasureTiles.Add(currentTile.Item1);
+                if (currentTile.Item1.IsTreasure() && !this.visitedTreasures.Contains(currentTile.Item1)) {
+                    this.visitedTreasures.Add(currentTile.Item1);
                     Tuple <Tuple<Tile, string>, List<Tile>> result = Tuple.Create(currentTile, path);
+                    path.RemoveAt(path.Count-1);
+                    path.RemoveAt(0);
+                    path.RemoveAt(0);
+                    processRoute = processRoute.Concat(path).ToList();
                     BFSsteps += currentTile.Item2.Length;
                     BFSRoute += currentTile.Item2;
                     BFSnodes += visitedCount;
@@ -174,6 +185,11 @@ namespace Mazes {
 
         public List <Tuple <Tuple<Tile, string>, List<Tile>>> BFS (Tile startingTile) {
             List <Tuple <Tuple<Tile, string>, List<Tile>>> result = new List<Tuple <Tuple<Tile, string>, List<Tile>>>();
+            BFSsteps = 0;
+            BFSnodes = 0;
+            BFSRoute = "";
+            processRoute = new List<Tile>();
+            visitedTreasures = new HashSet<Tile>();
             Tile start = GetStartingTile();
             bool finish = false;
             Console.WriteLine("Results: ");
@@ -198,11 +214,8 @@ namespace Mazes {
         public List<Tile> GetFinalPath() {
             List<Tile> ret = new List<Tile>();
             Tile start = GetStartingTile();
-            Tuple<int, int> Coor = GetTileCoordinate(start);
-            int x = Coor.Item1;
-            int y = Coor.Item2;
-            Console.WriteLine("Start: " + start.Id);
-            Console.WriteLine(" x: " + x + " y: " + y);
+            ret.Add(start);
+            (int x, int y)  = GetTileCoordinate(start);
             string Route = BFSRoute;
             foreach (var r in Route) {
                 if (r == 'U') {
