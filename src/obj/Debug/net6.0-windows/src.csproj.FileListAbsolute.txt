@@ -1,3 +1,8 @@
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.exe
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.deps.json
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.runtimeconfig.json
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.dll
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.pdb
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.AssemblyReference.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\MazeView.baml
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\TileView.baml
@@ -7,11 +12,6 @@ C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-wi
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.lref
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.exe
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.deps.json
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.runtimeconfig.json
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.dll
-C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.pdb
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.g.resources
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.GeneratedMSBuildEditorConfig.editorconfig

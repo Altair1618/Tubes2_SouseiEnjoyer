@@ -9,16 +9,23 @@ namespace Mazes {
 
         private char Category;
 
+        public int Visited
+        {
+            get; set;
+        }
+
         // Constructor
         public Tile() {
             this.Id = tileCount + 1;
             this.Category = 'U';
+            this.Visited = 0;
             tileCount++;
         }
 
         public Tile(char Category) {
             this.Id = tileCount + 1;
             this.Category = Category;
+            this.Visited = 0;
             tileCount++;
         }
 

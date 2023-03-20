@@ -20,7 +20,7 @@ namespace Views
             }
             else
             {
-                tileBorder.Background = new SolidColorBrush(Colors.White);
+                tileBorder.Background = new SolidColorBrush(Colors.DarkGray);
             }
 
             if (tile.IsTreasure() || tile.IsStartingPoint())
