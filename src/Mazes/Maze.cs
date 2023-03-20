@@ -84,7 +84,7 @@ namespace Mazes {
 
         public Tuple<int, int> GetTileCoordinate(Tile tile) {
             int tileIdInMaze = tile.Id - MazeLayout[0][0].Id;
-            return Tuple.Create(tileIdInMaze / GetRow(), tileIdInMaze % GetRow());
+            return Tuple.Create(tileIdInMaze / GetCol(), tileIdInMaze % GetCol());
         }
 
         public static string GetInversedPath(string path) {
