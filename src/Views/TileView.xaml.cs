@@ -9,14 +9,16 @@ namespace Views
 {
     public partial class TileView : Border
     {
-        public TileView(Tile tile)
+        private int tileSize;
+        public TileView(Tile tile, int tileSize = 100)
         {
             InitializeComponent();
 
             // tileBorder.SetValue(Border.CornerRadiusProperty, new CornerRadius(10));
-            if (tile.IsWalkable() || tile.IsStartingPoint()) 
+            this.tileSize = tileSize;
+            if (tile.IsWalkable() || tile.IsStartingPoint())
             {
-                tileBorder.Background = new SolidColorBrush(Colors.LightGray);
+                tileBorder.Background = new SolidColorBrush(Colors.LightSteelBlue);
             }
             else
             {
@@ -26,12 +28,12 @@ namespace Views
             if (tile.IsTreasure() || tile.IsStartingPoint())
             {
                 // Create Image Element
-                Border b2 = new Border();
-                ImageBrush image = new ImageBrush();
+                /*                Border b2 = new Border();
+                                ImageBrush image = new ImageBrush();
 
-                BitmapImage myBitmapImage = new BitmapImage();
+                                BitmapImage myBitmapImage = new BitmapImage();
 
-                myBitmapImage.BeginInit();
+                                myBitmapImage.BeginInit();*/
                 string uri = "";
                 if (tile.IsTreasure())
                 {
@@ -40,17 +42,70 @@ namespace Views
                 {
                     uri = "../../src/assets/start.png";
                 }
-                myBitmapImage.UriSource = new Uri(uri, UriKind.Relative);
+                this.addImage(uri);
+                //myBitmapImage.UriSource = new Uri(uri, UriKind.Relative);
 
-                myBitmapImage.DecodePixelWidth = 40;
+                //myBitmapImage.DecodePixelWidth = (int) (0.4 * tileSize);
+                //myBitmapImage.EndInit();
+
+                //image.ImageSource = myBitmapImage;
+                //b2.Background = image;
+                //b2.Width = (int)(0.4 * tileSize);
+                //b2.Height = (int)(0.4 * tileSize);
+                //tileBorder.Child = b2;
+            }
+
+
+        }
+        public void addImage(string uriPath)
+        {
+            tileBorder.Child = null;
+            Border b2 = new Border();
+            ImageBrush image = new ImageBrush();
+
+            BitmapImage myBitmapImage = new BitmapImage();
+
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(uriPath, UriKind.Relative);
+
+            myBitmapImage.DecodePixelWidth = (int)(0.4 * tileSize);
+            myBitmapImage.EndInit();
+
+            image.ImageSource = myBitmapImage;
+            b2.Background = image;
+            b2.Width = (int)(0.4 * tileSize);
+            b2.Height = (int)(0.4 * tileSize);
+            tileBorder.Child = b2;
+        }
+
+        public void addImageOnImage(string uriPath)
+        {
+            if (tileBorder.Child != null)
+            {
+                Border b2 = new Border();
+                ImageBrush image = new ImageBrush();
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri(uriPath, UriKind.Relative);
+
+                myBitmapImage.DecodePixelWidth = (int)(0.4 * tileSize);
                 myBitmapImage.EndInit();
 
                 image.ImageSource = myBitmapImage;
                 b2.Background = image;
-                b2.Width = 40;
-                b2.Height = 40;
-                tileBorder.Child = b2;
+                b2.Name = "imageOnImage";
+                b2.Width = (int)(0.4 * tileSize);
+                b2.Height = (int)(0.4 * tileSize);
+                Border tileBorderChild = tileBorder.Child as Border;
+                tileBorderChild.Child = b2;
+            } else
+            {
+                this.addImage(uriPath);
+                Border tileBorderChild = tileBorder.Child as Border;
+                tileBorderChild.Name = "imageOnImage";
             }
         }
-    }
+    } 
 }

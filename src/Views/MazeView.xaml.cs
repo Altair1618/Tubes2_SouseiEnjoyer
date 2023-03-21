@@ -33,7 +33,7 @@ namespace Views
                     column.Width = new GridLength(tileSize);
                     mazeGrid.ColumnDefinitions.Add(column);
 
-                    TileView tileView = new TileView(maze.GetTile(i, j));
+                    TileView tileView = new TileView(maze.GetTile(i, j), tileSize);
                     tileView.SetValue(Border.CornerRadiusProperty, new CornerRadius(tileSize / 10));
                     mazeGrid.Children.Add(tileView);
 
@@ -56,7 +56,18 @@ namespace Views
                         if (mazeGrid.Children[maze.MazeLayout[i][j].Id - maze.MazeLayout[0][0].Id] != null)
                         {
                             Border tileBorder = mazeGrid.Children[maze.MazeLayout[i][j].Id - maze.MazeLayout[0][0].Id] as Border;
-                            tileBorder.Background = new SolidColorBrush(Colors.LightGray);
+                            tileBorder.Background = new SolidColorBrush(Colors.LightSteelBlue);
+                            Border tileBorderChild = tileBorder.Child as Border;
+
+                            if (tileBorderChild != null && tileBorderChild.Name == "imageOnImage")
+                            {
+                                tileBorder.Child = null;
+                            }
+
+                            if (tileBorderChild != null && tileBorderChild.Child != null)
+                            {
+                                tileBorderChild.Child = null;
+                            }
                         }            
                     }
                 }
@@ -71,11 +82,27 @@ namespace Views
                 Tuple<int, int> coordinate = maze.GetTileCoordinate(finalPath[i]);
                 maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited++;
                 int tileId = finalPath[i].Id - maze.GetFirstId();
-                Border tile = mazeGrid.Children[tileId] as Border;
+                TileView tile = mazeGrid.Children[tileId] as TileView;
                 // tile.Background = new SolidColorBrush(Colors.LightGreen);
+                if (i > 0)
+                {
+                    int prevTileId = finalPath[i - 1].Id - maze.GetFirstId();
+                    Border prevTile = mazeGrid.Children[prevTileId] as Border;
+                    Border prevTileChild = prevTile.Child as Border;
+                    if (prevTileChild != null && prevTileChild.Name == "imageOnImage")
+                    {
+                        prevTile.Child = null;
+                    }
+
+                    if (prevTileChild.Child != null)
+                    {
+                        prevTileChild.Child = null;
+                    }
+                }
                 SolidColorBrush color = new SolidColorBrush(Colors.LightGreen);
                 color.Opacity = 0.3 * (maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited);
                 tile.Background = color;
+                tile.addImageOnImage("../../src/assets/kobo2.png");
                 await Task.Delay(timeDelay);
             }
         }

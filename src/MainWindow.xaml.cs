@@ -38,6 +38,23 @@ namespace src
             InitializeComponent();
             Uri iconUri = new Uri("../../src/assets/treasure.ico", UriKind.Relative);
             window.Icon = BitmapFrame.Create(iconUri);
+            Border b2 = new Border();
+            ImageBrush image = new ImageBrush();
+            BitmapImage myBitmapImage = new BitmapImage();
+
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri("../../src/assets/kobo.png", UriKind.Relative);
+
+            myBitmapImage.DecodePixelWidth = 200;
+            myBitmapImage.EndInit();
+
+            image.ImageSource = myBitmapImage;
+            b2.Background = image;
+            b2.HorizontalAlignment = HorizontalAlignment.Left;
+            b2.VerticalAlignment = VerticalAlignment.Bottom;
+            b2.Width = 200;
+            b2.Height = 200;
+            gridBorder.Child = b2;
         }
 
         public void openFileButton(object sender, RoutedEventArgs e)
@@ -65,7 +82,9 @@ namespace src
                         mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
                     }
 
-                    int tileSize = Math.Min(100, (int)mazePanel.ActualWidth / maze.GetRow());
+                    int tileSize = Math.Min(100, (int)mazePanel.ActualWidth / maze.GetCol());
+                    tileSize = Math.Min(tileSize, (int)System.Windows.SystemParameters.PrimaryScreenHeight / maze.GetRow());
+                    tileSize = Math.Max(tileSize, 20);
                     mazeView = new MazeView(maze, tileSize);
                     mazeView.Width = maze.GetCol() * tileSize;
                     mazeView.Height = maze.GetRow() * tileSize;
@@ -127,7 +146,7 @@ namespace src
             inputfile.IsEnabled = false;
 
             await mazeView.ShowProgress(processTiles, timeDelay);
-            await Task.Delay(100);
+            await Task.Delay(timeDelay);
             await mazeView.ShowFinalPath(finalPath, timeDelay);
 
             visualize.IsEnabled = true;
