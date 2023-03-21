@@ -367,7 +367,6 @@ namespace Mazes {
             while (dfsStack.Count > 0) {
                 // Initiate Search
                 Tile currentTile = dfsStack.Pop();
-                Console.WriteLine(GetTileCoordinate(currentTile));
                 retList.Add(currentTile);
                 if (currentTile.IsTreasure()) visitedTreasure++;
                 (int row, int col) = GetTileCoordinate(currentTile);
@@ -417,6 +416,27 @@ namespace Mazes {
             dfsStack.Clear();
 
             return retList;
+        }
+
+        public string GetMove(List<Tile> path) {
+            string retString = "";
+
+            for (int i = 1; i < path.Count(); i++) {
+                (int currRow, int currCol) = GetTileCoordinate(path[i]);
+                (int prevRow, int prevCol) = GetTileCoordinate(path[i - 1]);
+
+                if (currRow == prevRow && currCol == prevCol + 1) {
+                    retString += "R";
+                } else if (currRow == prevRow && currCol == prevCol - 1) {
+                    retString += "L";
+                } else if (currRow == prevRow - 1 && currCol == prevCol) {
+                    retString += "U";
+                } else {
+                    retString += "D";
+                }
+            }
+
+            return retString;
         }
     }
 }

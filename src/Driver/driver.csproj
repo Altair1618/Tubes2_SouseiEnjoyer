@@ -6,12 +6,16 @@
       <ImplicitUsings>enable</ImplicitUsings>
       <Nullable>enable</Nullable>
       <!-- Ganti ini sama Class yang mau dirun -->
-      <StartupObject>Drivers.BFSDriver</StartupObject>
+      <StartupObject>Drivers.DFSDriver</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="../Mazes/*.cs" />
         <Compile Include="../IO/*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.IO.Packaging" Version="8.0.0-preview.2.23128.3" />
     </ItemGroup>
   
 </Project>

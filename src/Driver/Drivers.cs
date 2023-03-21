@@ -58,12 +58,12 @@ namespace Drivers {
             Maze maze = new Maze();
             
             // Test 1 : RRRDDLL
-            // string input = "KRRRXRXTXTRRXRXX";
-            // int row = 4; int col = 4;
+            string input = "KRRRXRXTXTRRXRXX";
+            int row = 4; int col = 4;
 
             // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-            string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
-            int row = 5, col = 6;
+            // string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
+            // int row = 5, col = 6;
 
             // Test 3 : RRRLLDD
             // string input = "KRRTXRXXXTXX";
@@ -84,6 +84,8 @@ namespace Drivers {
             foreach (var item in list) {
                 Console.WriteLine(maze.GetTileCoordinate(item));
             }
+
+            Console.WriteLine(maze.GetMove(list));
         }
     }
 }
