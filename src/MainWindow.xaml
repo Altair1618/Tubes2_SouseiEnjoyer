@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:src"
 		xmlns:maze="clr-namespace:Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Treasure Hunt"
+		Name="window"
+		Height="450"
+		Width="800">
 	<ScrollViewer HorizontalScrollBarVisibility="Auto">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -48,6 +51,7 @@
 					</Label>
 					<RadioButton Name="BFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">BFS</RadioButton>
 					<RadioButton Name="DFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">DFS</RadioButton>
+					<RadioButton Name="TSP" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">TSP</RadioButton>
 				</StackPanel>
 				<StackPanel Margin="0 20">
 					<DockPanel VerticalAlignment="Center">
@@ -69,24 +73,26 @@
 							TickFrequency="100"
 							ValueChanged="setTimeDelay"/>
 				</StackPanel>
-				<StackPanel Margin="0 20">
-					<TextBlock  Name="route"
-								Text="Route: "
-								Foreground="White"
-								FontSize="16" />
-					<TextBlock Name="nodes"
-								Text="Nodes: "
-								Foreground="White"
-								FontSize="16" />
-					<TextBlock Name="steps"
-								Text="Steps: "
-								Foreground="White"
-								FontSize="16" />
-					<TextBlock Name="extime"
-								Text="Execution Time: "
-								Foreground="White"
-								FontSize="16" />
-				</StackPanel>
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+					<StackPanel Margin="0 20">
+						<TextBlock  Name="route"
+									Text="Route: "
+									Foreground="White"
+									FontSize="16" />
+						<TextBlock Name="nodes"
+									Text="Nodes: "
+									Foreground="White"
+									FontSize="16" />
+						<TextBlock Name="steps"
+									Text="Steps: "
+									Foreground="White"
+									FontSize="16" />
+						<TextBlock Name="extime"
+									Text="Execution Time: "
+									Foreground="White"
+									FontSize="16" />
+					</StackPanel>
+				</ScrollViewer>
 				<Button Name="search"
 						Background="SkyBlue"
 						Padding="0 8"
@@ -119,7 +125,7 @@
 					</Button.Resources>
 					VISUALIZE
 				</Button>
-				<StackPanel Orientation="Horizontal">
+				<!--<StackPanel Orientation="Horizontal">
 					<Button Name="replay"
 						Background="Transparent"
 						Foreground="White"
@@ -139,14 +145,12 @@
 						</Button.Resources>
 						&#10227;
 					</Button>
-				</StackPanel>
+				</StackPanel>-->
 			</StackPanel>
 			<StackPanel Name="mazePanel" 
 						Grid.Column="1"
 						Orientation="Vertical"
 						VerticalAlignment="Center">
-				
-			
 			</StackPanel>
 		</Grid>
 	</ScrollViewer>

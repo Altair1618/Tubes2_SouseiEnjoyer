@@ -36,6 +36,8 @@ namespace src
             this.maze = new Maze();
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
+            Uri iconUri = new Uri("../../src/assets/treasure.ico", UriKind.Relative);
+            window.Icon = BitmapFrame.Create(iconUri);
         }
 
         public void openFileButton(object sender, RoutedEventArgs e)
@@ -93,20 +95,28 @@ namespace src
             {
                 maze.BFS(maze.GetStartingTile());
                 processTiles = maze.processRoute;
-                finalPath = maze.GetFinalPath();
+                finalPath = maze.GetFinalPath(maze.BFSRoute);
                 nodes.Text += maze.BFSnodes.ToString();
                 steps.Text += maze.BFSsteps.ToString();
                 route.Text += maze.BFSRoute;
-                visualize.IsEnabled = true;
             } else if (algorithm == "DFS")
             {
                 processTiles = maze.DFS();
                 finalPath = processTiles;
-                visualize.IsEnabled = true;
                 nodes.Text += processTiles.Count.ToString();
-                steps.Text += processTiles.Distinct().Count().ToString();
+                steps.Text += processTiles.Count.ToString();
+                route.Text += maze.GetMove(processTiles);
+            } else if (algorithm == "TSP")
+            {
+                maze.BFS(maze.GetStartingTile());
+                processTiles = maze.TSPprocessRoute;
+                finalPath = maze.GetFinalPath(maze.TSPRoute);
+                nodes.Text += maze.TSPnodes.ToString();
+                steps.Text += maze.TSPsteps.ToString();
+                route.Text += maze.TSPRoute;
             }
 
+            visualize.IsEnabled = true;
             search.IsEnabled = false;
         }
 
@@ -122,41 +132,6 @@ namespace src
 
             visualize.IsEnabled = true;
             inputfile.IsEnabled = true;
-            /*if (algorithm == "DFS")
-            {
-            } else if (algorithm == "BFS")
-            {
-                mazeView.Reset();
-                if (mazePanel.Children.Count > 0)
-                {
-                    Grid mazeGrid = mazePanel.Children[0] as Grid;
-                    for (int i = 0; i < result.Count; i++)
-                    {
-                        for (int j = 0; j < result[i].Item2.Count; j++)
-                        {
-                            if (i > 0 && j == 0)
-                            {
-                                continue;
-                            }
-                            Tuple<int, int> coordinate = maze.GetTileCoordinate(result[i].Item2[j]);
-                            // Trace.WriteLine(result[i].Item2[j].Id);
-                            await Task.Delay(1000);
-                            Border tileBorder = mazeGrid.Children[result[i].Item2[j].Id - maze.MazeLayout[0][0].Id] as Border;
-                            if (j > 0)
-                            {
-                                Tuple<int, int> prevCoordinate = maze.GetTileCoordinate(result[i].Item2[j-1]);
-                                Border prevTileBorder = mazeGrid.Children[result[i].Item2[j-1].Id - maze.MazeLayout[0][0].Id] as Border;
-                                SolidColorBrush color = new SolidColorBrush(Colors.Goldenrod);
-                                color.Opacity = 0.15 * (maze.MazeLayout[prevCoordinate.Item1][prevCoordinate.Item2].Visited);
-                                prevTileBorder.Background = color;
-                            }
-                            maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited++;
-                            tileBorder.Background = new SolidColorBrush(Colors.SkyBlue);
-                        }
-                    }
-                }
-                replay.IsEnabled = true;
-            }*/
         }
 
         public void replayButton(object sender, RoutedEventArgs e)
@@ -173,7 +148,7 @@ namespace src
                 algorithm = rb.Content.ToString();
                 search.IsEnabled = true;
                 visualize.IsEnabled = false;
-                replay.IsEnabled = false;
+                //replay.IsEnabled = false;
             }
         }
 
@@ -185,7 +160,7 @@ namespace src
             extime.Text = "Execution Time: ";
             search.IsEnabled = false;
             visualize.IsEnabled = false;
-            replay.IsEnabled = false;
+            //replay.IsEnabled = false;
         }
 
         public void setTimeDelay(object sender, RoutedEventArgs e)
