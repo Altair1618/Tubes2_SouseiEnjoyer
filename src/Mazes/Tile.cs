@@ -29,7 +29,7 @@ namespace Mazes {
         public Tile(char Category) {
             this.Id = tileCount + 1;
             this.Category = Category;
-            if (Category != 'K' || Category != 'X' || Category != 'T' || Category != 'R')
+            if (Category != 'K' && Category != 'X' && Category != 'T' && Category != 'R')
             {
                 throw new FileFormatException();
             }
