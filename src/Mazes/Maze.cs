@@ -22,6 +22,18 @@ namespace Mazes {
         public List<Tile> processRoute {
             get; private set;
         }
+        public int TSPsteps {
+            get; private set;
+        }
+        public int TSPnodes {
+            get; private set;
+        }
+        public string TSPRoute {
+            get; private set;
+        }
+        public List<Tile> TSPprocessRoute {
+            get; private set;
+        }
         private int treasureCount;
         
         private HashSet <Tile> visitedTreasures;
@@ -29,12 +41,16 @@ namespace Mazes {
         // Constructor
         public Maze() {
             MazeLayout = new List<List<Tile>>();
+            visitedTreasures = new HashSet<Tile>();
             treasureCount = -1;
             BFSsteps = 0;
+            TSPsteps = 0;
             BFSnodes = 0;
-            visitedTreasures = new HashSet<Tile>();
+            TSPnodes = 0;
             BFSRoute = "";
+            TSPRoute = "";
             processRoute = new List<Tile>();
+            TSPprocessRoute = new List<Tile>();
             // processRoute.Add(GetStartingTile());
         }
 
@@ -204,26 +220,113 @@ namespace Mazes {
             BFSRoute = "";
             processRoute = new List<Tile>();
             visitedTreasures = new HashSet<Tile>();
-
+            Tuple <Tile, string> temp = Tuple.Create(new Tile(), "");
             Tile start = GetStartingTile();
             bool finish = false;
             while  (!finish) {
-                Tuple <Tile, string> temp = BFSfind(start);
+                temp = BFSfind(start);
                 if (temp.Item2 == "") {
                     finish = true; 
                 } else {
                     start = temp.Item1;
+                    Console.WriteLine("temp: " + temp.Item1.Id);
                 }
             }
+            Console.WriteLine("last temp: " + temp.Item1.Id);
+
+            TSPnodes = BFSnodes;
+            TSPsteps = BFSsteps;
+            TSPRoute = BFSRoute;
+            TSPprocessRoute = processRoute;
+            TSPfind(start);
+
         }
 
-        public List<Tile> GetFinalPath() {
+        public Tuple<Tile, string> TSPfind(Tile startingTile) {
+            // initialize
+            List<Tile> path = new List<Tile>();
+            processRoute.Add(startingTile);
+
+            // Queue to store 
+            Queue<Tuple<Tile, string>> q = new Queue<Tuple<Tile, string>>();
+            q.Enqueue(Tuple.Create(startingTile, ""));
+
+            // Dictionary to store visited tiles
+            Dictionary<Tile, bool> visited = new Dictionary<Tile, bool>();
+            foreach (var rowTile in MazeLayout) {
+                foreach (var tile in rowTile) {
+                    visited.Add(tile, false);
+                }
+            }
+
+            visited[startingTile] = true;
+            int visitedCount = 0;
+            while (q.Count > 0) {
+                Tuple<Tile, string> currentTile = q.Dequeue();
+                (int x, int y) = GetTileCoordinate(currentTile.Item1);
+                path.Add(currentTile.Item1);
+
+                if (currentTile.Item1.IsStartingPoint()) {
+                    // updating attributes
+                    path.RemoveAt(path.Count-1);
+                    path.RemoveAt(0);
+                    TSPprocessRoute = TSPprocessRoute.Concat(path).ToList();
+                    TSPsteps += currentTile.Item2.Length;
+                    Console.WriteLine("TSPsteps: " + TSPsteps);
+                    Console.WriteLine("TSP+: " + currentTile.Item2.Length);
+                    TSPRoute += currentTile.Item2;
+                    TSPnodes += visitedCount;
+                    return currentTile;
+                }
+
+                // Up
+                if (IsIndexValid(x - 1, y) && MazeLayout[x - 1][y].isWalkable() && !visited[MazeLayout[x - 1][y]]) {
+                    Tile newTile = MazeLayout[x - 1][y];
+                    visited[newTile] = true;
+                    visitedCount++;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "U"));
+                }
+
+                // Left
+                if (IsIndexValid(x, y - 1) && MazeLayout[x][y - 1].isWalkable() && !visited[MazeLayout[x][y - 1]]) {
+                    Tile newTile = MazeLayout[x][y - 1];
+                    visited[newTile] = true;
+                    visitedCount++;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "L"));
+                }
+
+                // Right
+                if (IsIndexValid(x, y + 1) && MazeLayout[x][y + 1].isWalkable() && !visited[MazeLayout[x][y + 1]]) {
+                    Tile newTile = MazeLayout[x][y + 1];
+                    visited[newTile] = true;
+                    visitedCount++;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "R"));
+                }
+
+                // Down
+                if (IsIndexValid(x + 1, y) && MazeLayout[x + 1][y].isWalkable() && !visited[MazeLayout[x + 1][y]]) {
+                    Tile newTile = MazeLayout[x + 1][y];
+                    visited[newTile] = true;
+                    visitedCount++;
+                    q.Enqueue(Tuple.Create(newTile, currentTile.Item2 + "D"));
+                }
+            }
+
+            // No treasure found
+            Tuple <Tile, string> temp = Tuple.Create(new Tile(), "");
+            return temp;
+        }
+
+        // public void TSP () {
+            
+        // }
+
+        public List<Tile> GetFinalPath(string route) {
             List<Tile> ret = new List<Tile>();
             Tile start = GetStartingTile();
             ret.Add(start);
             (int x, int y)  = GetTileCoordinate(start);
-            string Route = BFSRoute;
-            foreach (var r in Route) {
+            foreach (var r in route) {
                 if (r == 'U') {
                     Tile newTile = MazeLayout[x - 1][y];
                     x--;

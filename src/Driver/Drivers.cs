@@ -17,12 +17,27 @@ namespace Drivers {
     public class BFSDriver {
         static void Main(string[] args) {
             FileReader fileReader = new FileReader();
-            Maze maze = fileReader.read("../../test/test3.txt");
+            Maze maze = fileReader.read("../../test/test2.txt");
             maze.BFS(maze.GetStartingTile());
+            Console.WriteLine("\n--------TSP--------");
+            Console.WriteLine("Route: " + maze.TSPRoute);
+            Console.WriteLine("Steps: " + maze.TSPsteps);
+            Console.WriteLine("Nodes: " + maze.TSPnodes);
+            List<Tile> finalPathTSP = maze.GetFinalPath(maze.TSPRoute);
+            foreach (var x in finalPathTSP) {
+                Console.Write(x.Id + " ");
+            }
+            Console.Write("\n");
+            foreach(var x in maze.TSPprocessRoute) {
+                Console.Write(x.Id + " ");
+            }
+
+
+            Console.WriteLine("\n--------BFS--------");
             Console.WriteLine("Route: " + maze.BFSRoute);
             Console.WriteLine("Steps: " + maze.BFSsteps);
             Console.WriteLine("Nodes: " + maze.BFSnodes);
-            List<Tile> finalPath = maze.GetFinalPath();
+            List<Tile> finalPath = maze.GetFinalPath(maze.BFSRoute);
             foreach (var x in finalPath) {
                 Console.Write(x.Id + " ");
             }
@@ -30,6 +45,10 @@ namespace Drivers {
             foreach(var x in maze.processRoute) {
                 Console.Write(x.Id + " ");
             }
+
+            // List<Tile> finalPathTSP = maze.GetFinalPathTSP();
+
+
             
         }
     }
