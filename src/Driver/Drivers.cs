@@ -1,6 +1,6 @@
 using Mazes;
 using IO;
-using Graphs;
+// using Graphs;
 using System;
 using System.Collections.Generic;
 
@@ -23,8 +23,6 @@ namespace Drivers {
             maze.TSP(maze.GetStartingTile());
             Console.WriteLine("\n--------TSP--------");
             Console.WriteLine("Route: " + maze.TSPRoute);
-            Console.WriteLine("Steps: " + maze.TSPsteps);
-            Console.WriteLine("Nodes: " + maze.TSPnodes);
             List<Tile> finalPathTSP = maze.GetFinalPath(maze.TSPRoute);
             foreach (var x in finalPathTSP) {
                 Console.Write(x.Id + " ");
@@ -37,8 +35,6 @@ namespace Drivers {
 
             Console.WriteLine("\n--------BFS--------");
             Console.WriteLine("Route: " + maze.BFSRoute);
-            Console.WriteLine("Steps: " + maze.BFSsteps);
-            Console.WriteLine("Nodes: " + maze.BFSnodes);
             List<Tile> finalPath = maze.GetFinalPath(maze.BFSRoute);
             foreach (var x in finalPath) {
                 Console.Write(x.Id + " ");
@@ -91,36 +87,36 @@ namespace Drivers {
         }
     }
 
-    public class ShortestPathDriver {
-        static void Main(string[] args) {
-            Maze maze = new Maze();
+    // public class ShortestPathDriver {
+    //     static void Main(string[] args) {
+    //         Maze maze = new Maze();
             
-            // Test 1
-            string input = "KRRRXRXTXTRRXRXX";
-            int row = 4; int col = 4;
+    //         // Test 1
+    //         string input = "KRRRXRXTXTRRXRXX";
+    //         int row = 4; int col = 4;
             
-            // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-            // string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
-            // int row = 5, col = 6;
+    //         // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
+    //         // string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
+    //         // int row = 5, col = 6;
             
-            int index = 0;
-            for (int i = 0; i < row; i++) {
-                maze.MazeLayout.Add(new List<Tile>());
-                for (int j = 0; j < col; j++) {
-                    maze.MazeLayout[i].Add(new Tile(input[index++]));
-                }
-            }
-            maze.UpdateTreasureCount();
+    //         int index = 0;
+    //         for (int i = 0; i < row; i++) {
+    //             maze.MazeLayout.Add(new List<Tile>());
+    //             for (int j = 0; j < col; j++) {
+    //                 maze.MazeLayout[i].Add(new Tile(input[index++]));
+    //             }
+    //         }
+    //         maze.UpdateTreasureCount();
             
-            Graph graph = maze.ToWeightedGraph();
-            Node startingNode = null!;
-            foreach (var node in graph.Nodes) {
-                if (node.Category == 'S') startingNode = node;
-            }
+    //         Graph graph = maze.ToWeightedGraph();
+    //         Node startingNode = null!;
+    //         foreach (var node in graph.Nodes) {
+    //             if (node.Category == 'S') startingNode = node;
+    //         }
         
-            Console.WriteLine("Output:");
-            var temp = graph.ShortestPath(false);
-            Console.WriteLine(temp);
-        }
-    }
+    //         Console.WriteLine("Output:");
+    //         var temp = graph.ShortestPath(false);
+    //         Console.WriteLine(temp);
+    //     }
+    // }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Graphs;
+// using Graphs;
 
 namespace Mazes {
     public class Maze {
@@ -9,24 +9,11 @@ namespace Mazes {
         public List <List <Tile>> MazeLayout {
             get; private set;
         }
-        public int BFSsteps {
-            get; private set;
-        }
-
-        public int BFSnodes {
-            get; private set;
-        }
 
         public string BFSRoute {
             get; private set;
         }
         public List<Tile> processRoute {
-            get; private set;
-        }
-        public int TSPsteps {
-            get; private set;
-        }
-        public int TSPnodes {
             get; private set;
         }
         public string TSPRoute {
@@ -44,10 +31,6 @@ namespace Mazes {
             MazeLayout = new List<List<Tile>>();
             visitedTreasures = new HashSet<Tile>();
             treasureCount = -1;
-            BFSsteps = 0;
-            TSPsteps = 0;
-            BFSnodes = 0;
-            TSPnodes = 0;
             BFSRoute = "";
             TSPRoute = "";
             processRoute = new List<Tile>();
@@ -170,9 +153,7 @@ namespace Mazes {
                     path.RemoveAt(path.Count-1);
                     path.RemoveAt(0);
                     processRoute = processRoute.Concat(path).ToList();
-                    BFSsteps += currentTile.Item2.Length;
                     BFSRoute += currentTile.Item2;
-                    BFSnodes += visitedCount;
                     return currentTile;
                 }
 
@@ -216,8 +197,6 @@ namespace Mazes {
 
         public Tile BFS (Tile startingTile) {
             // restart
-            BFSsteps = 0;
-            BFSnodes = 0;
             BFSRoute = "";
             processRoute = new List<Tile>();
             visitedTreasures = new HashSet<Tile>();
@@ -240,8 +219,6 @@ namespace Mazes {
         public void TSP (Tile startingTile) {
             // restart
             Tile lastTreasure = BFS(startingTile);
-            TSPnodes = BFSnodes;
-            TSPsteps = BFSsteps;
             TSPRoute = BFSRoute;
             TSPprocessRoute = processRoute;
             TSPfind(lastTreasure);
@@ -278,11 +255,7 @@ namespace Mazes {
                     path.RemoveAt(path.Count-1);
                     path.RemoveAt(0);
                     TSPprocessRoute = TSPprocessRoute.Concat(path).ToList();
-                    TSPsteps += currentTile.Item2.Length;
-                    Console.WriteLine("TSPsteps: " + TSPsteps);
-                    Console.WriteLine("TSP+: " + currentTile.Item2.Length);
                     TSPRoute += currentTile.Item2;
-                    TSPnodes += visitedCount;
                     return currentTile;
                 }
 
