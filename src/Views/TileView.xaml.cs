@@ -98,8 +98,8 @@ namespace Views
                 b2.Name = "imageOnImage";
                 b2.Width = (int)(0.4 * tileSize);
                 b2.Height = (int)(0.4 * tileSize);
-                Border tileBorderChild = tileBorder.Child as Border;
-                tileBorderChild.Child = b2;
+                Border? tileBorderChild = tileBorder.Child as Border;
+                if (tileBorderChild != null) tileBorderChild.Child = b2;
             } else
             {
                 this.addImage(uriPath);

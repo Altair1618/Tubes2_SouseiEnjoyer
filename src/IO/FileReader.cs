@@ -15,7 +15,7 @@ namespace IO
             Maze maze = new Maze();
             using (StreamReader sr = new StreamReader(filePath))
             {
-                string line;
+                string? line;
                 // Read and display lines from the file until the end of
                 // the file is reached.
                 while ((line = sr.ReadLine()) != null)

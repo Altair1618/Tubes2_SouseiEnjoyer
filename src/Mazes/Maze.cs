@@ -130,7 +130,7 @@ namespace Mazes {
         public static string GetInversedPath(string path) {
             string s = "";
 
-            foreach (var c in path) {
+            foreach (var c in path.Reverse()) {
                 if (c == 'U') s += 'D';
                 else if (c == 'L') s += 'R';
                 else if (c == 'R') s += 'L';

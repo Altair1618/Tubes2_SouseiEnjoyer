@@ -66,6 +66,8 @@
 					<RadioButton Name="BFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">BFS</RadioButton>
 					<RadioButton Name="DFS" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">DFS</RadioButton>
 					<RadioButton Name="TSP" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">TSP</RadioButton>
+					<RadioButton Name="ShortestPath" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">Shortest Path</RadioButton>
+					<RadioButton Name="ShortestPathTSP" Foreground="White" FontSize="16" VerticalContentAlignment="Center" Checked="setAlgorithm">Shortest Path (TSP)</RadioButton>
 				</StackPanel>
 				<StackPanel Margin="0 20">
 					<DockPanel VerticalAlignment="Center">

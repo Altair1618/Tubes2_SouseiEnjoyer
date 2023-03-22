@@ -47,6 +47,7 @@ namespace Views
         public void Reset()
         {
             maze.ResetVisitedTiles();
+            Border tileBorder = null!;
             for (int i = 0; i < maze.GetRow(); i++)
             {
                 for (int j = 0; j < maze.GetCol(); j++)
@@ -55,7 +56,7 @@ namespace Views
                     {
                         if (mazeGrid.Children[maze.MazeLayout[i][j].Id - maze.MazeLayout[0][0].Id] != null)
                         {
-                            Border tileBorder = mazeGrid.Children[maze.MazeLayout[i][j].Id - maze.MazeLayout[0][0].Id] as Border;
+                            tileBorder = mazeGrid.Children[maze.MazeLayout[i][j].Id - maze.MazeLayout[0][0].Id] as Border;
                             tileBorder.Background = new SolidColorBrush(Colors.LightSteelBlue);
                             Border tileBorderChild = tileBorder.Child as Border;
 
