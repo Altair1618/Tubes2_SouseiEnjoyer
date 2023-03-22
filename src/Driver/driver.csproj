@@ -12,6 +12,7 @@
     <ItemGroup>
         <Compile Include="../Mazes/*.cs" />
         <Compile Include="../IO/*.cs" />
+        <Compile Include="../Graphs/*.cs" />
     </ItemGroup>
 
     <ItemGroup>

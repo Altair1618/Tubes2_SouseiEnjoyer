@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Graphs;
 
 namespace Mazes {
     public class Maze {
@@ -437,6 +438,148 @@ namespace Mazes {
             }
 
             return retString;
+        }
+
+        private class TileGraphState {
+            // Attributes
+            public Tile PrevTile;
+            public Tile LastNode;
+            public string Path;
+
+            // Constructor
+            public TileGraphState(Tile prev, Tile lastNode, string path) {
+                PrevTile = prev;
+                LastNode = lastNode;
+                Path = path;
+            }
+        }
+
+        public Graph ToWeightedGraph() {
+            Graph graph = new Graph();
+
+            Stack<Tile> queueStack = new Stack<Tile>();
+            Dictionary<Tile, Node> mapNodeTile = new Dictionary<Tile, Node>();
+            Dictionary<Tile, TileGraphState> state = new Dictionary<Tile, TileGraphState>();
+
+            // Initiate state
+            foreach (var tileList in MazeLayout) {
+                foreach (var tile in tileList) {
+                    state[tile] = new TileGraphState(null!, null!, "");
+                }
+            }
+
+            queueStack.Push(GetStartingTile());
+            Node start = new Node('S');
+            mapNodeTile[GetStartingTile()] = start;
+            graph.AddNode(start);
+            state[GetStartingTile()] = new TileGraphState(null!, GetStartingTile(), "");
+            while (queueStack.Count > 0) {
+                // Initiate Search
+                Tile currentTile = queueStack.Pop();
+                (int row, int col) = GetTileCoordinate(currentTile);
+                
+                if (currentTile.IsTreasure()) {
+                    Node tempNode = new Node('T');
+                    mapNodeTile[currentTile] = tempNode;
+                    graph.AddNode(tempNode);
+                    graph.AddEdge(mapNodeTile[state[currentTile].LastNode], tempNode, state[currentTile].Path);
+                    state[currentTile] = new TileGraphState(state[currentTile].PrevTile, currentTile, "");
+                }
+
+                int cnt = 0;
+                if (IsIndexValid(row + 1, col) && (MazeLayout[row + 1][col].IsWalkable() || MazeLayout[row + 1][col].IsStartingPoint())) cnt++;
+                if (IsIndexValid(row, col + 1) && (MazeLayout[row][col + 1].IsWalkable() || MazeLayout[row][col + 1].IsStartingPoint())) cnt++;
+                if (IsIndexValid(row, col - 1) && (MazeLayout[row][col - 1].IsWalkable() || MazeLayout[row][col - 1].IsStartingPoint())) cnt++;
+                if (IsIndexValid(row - 1, col) && (MazeLayout[row - 1][col].IsWalkable() || MazeLayout[row - 1][col].IsStartingPoint())) cnt++;
+
+                if (cnt != 2 && !(currentTile.IsTreasure() || currentTile.IsStartingPoint())) {
+                    Node tempNode = new Node('N');
+                    mapNodeTile[currentTile] = tempNode;
+                    graph.AddNode(tempNode);
+                    graph.AddEdge(mapNodeTile[state[currentTile].LastNode], tempNode, state[currentTile].Path);
+                    state[currentTile] = new TileGraphState(state[currentTile].PrevTile, currentTile, "");
+                }
+                
+                Tile accessedTile;
+                
+                if (IsIndexValid(row + 1, col) ) {
+                    accessedTile = MazeLayout[row + 1][col];
+                    if (accessedTile.IsWalkable()) {
+                        if (state[accessedTile].PrevTile == null) {
+                            state[accessedTile].Path = state[currentTile].Path + "D";
+                            state[accessedTile].PrevTile = currentTile;
+                            state[accessedTile].LastNode = state[currentTile].LastNode;
+                            queueStack.Push(accessedTile);
+                        } else if (mapNodeTile.ContainsKey(accessedTile) && accessedTile != state[currentTile].PrevTile) {
+                            graph.AddEdge(mapNodeTile[state[currentTile].LastNode], mapNodeTile[accessedTile], state[currentTile].Path + "D");
+                        }
+                    }
+                }
+
+                if (IsIndexValid(row, col + 1)) {
+                    accessedTile = MazeLayout[row][col + 1];
+                    if (accessedTile.IsWalkable()) {
+                        if (state[accessedTile].PrevTile == null) {
+                            state[accessedTile].Path = state[currentTile].Path + "R";
+                            state[accessedTile].PrevTile = currentTile;
+                            state[accessedTile].LastNode = state[currentTile].LastNode;
+                            queueStack.Push(accessedTile);
+                        } else if (mapNodeTile.ContainsKey(accessedTile) && accessedTile != state[currentTile].PrevTile) {
+                            graph.AddEdge(mapNodeTile[state[currentTile].LastNode], mapNodeTile[accessedTile], state[currentTile].Path + "R");
+                        }
+                    }
+                }
+
+                if (IsIndexValid(row, col - 1)) {
+                    accessedTile = MazeLayout[row][col - 1];
+                    if (accessedTile.IsWalkable()) {
+                        if (state[accessedTile].PrevTile == null) {
+                            state[accessedTile].Path = state[currentTile].Path + "L";
+                            state[accessedTile].PrevTile = currentTile;
+                            state[accessedTile].LastNode = state[currentTile].LastNode;
+                            queueStack.Push(accessedTile);
+                        } else if (mapNodeTile.ContainsKey(accessedTile) && accessedTile != state[currentTile].PrevTile) {
+                            graph.AddEdge(mapNodeTile[state[currentTile].LastNode], mapNodeTile[accessedTile], state[currentTile].Path + "L");
+                        }
+                    }
+                }
+
+                if (IsIndexValid(row - 1, col)) {
+                    accessedTile = MazeLayout[row - 1][col];
+                    if (accessedTile.IsWalkable()) {
+                        if (state[accessedTile].PrevTile == null) {
+                            state[accessedTile].Path = state[currentTile].Path + "U";
+                            state[accessedTile].PrevTile = currentTile;
+                            state[accessedTile].LastNode = state[currentTile].LastNode;
+                            queueStack.Push(accessedTile);
+                        } else if (mapNodeTile.ContainsKey(accessedTile) && accessedTile != state[currentTile].PrevTile) {
+                            graph.AddEdge(mapNodeTile[state[currentTile].LastNode], mapNodeTile[accessedTile], state[currentTile].Path + "U");
+                        }
+                    }
+                }
+            }
+            queueStack.Clear();
+
+            return graph;
+        }
+
+        public List<Tile> PathToList(Tile start, string path) {
+            List<Tile> ret = new List<Tile>();
+
+            ret.Add(start);
+            Tile currentTile = start;
+            foreach (var c in path) {
+                (int row, int col) = GetTileCoordinate(currentTile);
+
+                if (c == 'U') currentTile = MazeLayout[row - 1][col];
+                else if (c == 'L') currentTile = MazeLayout[row][col - 1];
+                else if (c == 'R') currentTile = MazeLayout[row][col + 1];
+                else currentTile = MazeLayout[row + 1][col];
+
+                ret.Add(currentTile);
+            }
+
+            return ret;
         }
     }
 }
