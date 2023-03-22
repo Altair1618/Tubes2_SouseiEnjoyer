@@ -141,27 +141,6 @@
 					</Button.Resources>
 					VISUALIZE
 				</Button>
-				<!--<StackPanel Orientation="Horizontal">
-					<Button Name="replay"
-						Background="Transparent"
-						Foreground="White"
-						FontSize="16"
-						VerticalAlignment="Bottom"
-						Margin="0 20 0 0"
-						FontWeight="Bold"
-						BorderThickness="2"
-						Width="40"
-						Height="40"
-						Click="replayButton"
-						IsEnabled="False">
-						<Button.Resources>
-							<Style TargetType="Border">
-								<Setter Property="CornerRadius" Value="100"/>
-							</Style>
-						</Button.Resources>
-						&#10227;
-					</Button>
-				</StackPanel>-->
 			</StackPanel>
 			<StackPanel Name="mazePanel" 
 						Grid.Column="1"

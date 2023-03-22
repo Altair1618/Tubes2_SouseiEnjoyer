@@ -43,16 +43,6 @@ namespace Views
                     uri = "../../src/assets/start.png";
                 }
                 this.addImage(uri);
-                //myBitmapImage.UriSource = new Uri(uri, UriKind.Relative);
-
-                //myBitmapImage.DecodePixelWidth = (int) (0.4 * tileSize);
-                //myBitmapImage.EndInit();
-
-                //image.ImageSource = myBitmapImage;
-                //b2.Background = image;
-                //b2.Width = (int)(0.4 * tileSize);
-                //b2.Height = (int)(0.4 * tileSize);
-                //tileBorder.Child = b2;
             }
 
 
@@ -103,7 +93,8 @@ namespace Views
             } else
             {
                 this.addImage(uriPath);
-                Border tileBorderChild = tileBorder.Child as Border;
+                Border tileBorderChild = null!;
+                tileBorderChild = tileBorder.Child as Border;
                 tileBorderChild.Name = "imageOnImage";
             }
         }

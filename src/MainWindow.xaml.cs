@@ -30,7 +30,9 @@ namespace src
         private MazeView? mazeView;
         private List<Tile>? processTiles;
         private List<Tile>? finalPath;
+        private string? resultRoute;
         private string? algorithm;
+        private double? elapsedTime;
         private int timeDelay = 100;
 
         public MainWindow()
@@ -109,66 +111,70 @@ namespace src
         public void searchButton(object sender, RoutedEventArgs e)
         {
             this.resetState();
+            Stopwatch stopwatch = new Stopwatch();
             if (mazeView != null) mazeView.Reset();
-            // search.IsEnabled = true;
+
             if (algorithm == "BFS")
             {
-                getAndUpdateBFS(false);
+                stopwatch.Start();
+                maze.BFS(maze.GetStartingTile());
+                stopwatch.Stop();
+                processTiles = maze.processRoute;
+                finalPath = maze.GetFinalPath(maze.BFSRoute);
+                resultRoute = maze.BFSRoute;
+                elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
             } else if (algorithm == "DFS")
             {
-                getAndUpdateDFS();
+                stopwatch.Start();
+                processTiles = maze.DFS();
+                stopwatch.Stop();
+                finalPath = processTiles;
+                resultRoute = maze.GetMove(finalPath);
+                elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
             } else if (algorithm == "TSP")
             {
-                getAndUpdateBFS(true);
+                stopwatch.Start();
+                maze.TSP(maze.GetStartingTile());
+                stopwatch.Stop();
+                processTiles = maze.TSPprocessRoute;
+                finalPath = maze.GetFinalPath(maze.TSPRoute);
+                resultRoute = maze.TSPRoute;
+                elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
             } else if (algorithm == "Shortest Path")
             {
-                getAndUpdateShortestPath(false);
+                getAndUpdateShortestPath(false);   
             } else if (algorithm == "Shortest Path (TSP)")
             {
                 getAndUpdateShortestPath(true);
             }
 
+            updateResult();
             visualize.IsEnabled = true;
             search.IsEnabled = false;
         }
 
         private void getAndUpdateShortestPath(bool isTSP)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             Graph graph = maze.ToWeightedGraph();
-            var routeSP = graph.ShortestPath(isTSP);
-            processTiles = maze.PathToList(maze.GetStartingTile(), routeSP);
+            resultRoute = graph.ShortestPath(isTSP);
+            stopwatch.Stop();
+            processTiles = maze.PathToList(maze.GetStartingTile(), resultRoute);
             finalPath = processTiles;
-            nodes.Text += (processTiles.Count - 1).ToString();
-            steps.Text += (processTiles.Count - 1).ToString();
-            route.Text += routeSP;
+            elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
         }
 
-        private void getAndUpdateDFS()
+        private void updateResult()
         {
-            processTiles = maze.DFS();
-            finalPath = processTiles;
-            nodes.Text += (processTiles.Count - 1).ToString();
-            steps.Text += (processTiles.Count - 1).ToString();
-            route.Text += maze.GetMove(processTiles);
-        }
-
-        private void getAndUpdateBFS(bool isTSP)
-        {
-            string resultRoute = "";
-            maze.BFS(maze.GetStartingTile());
-            if (isTSP)
+            if (processTiles != null) nodes.Text += (processTiles.Count - 1).ToString();
+            if (finalPath != null) steps.Text += (finalPath.Count - 1).ToString();
+            if (resultRoute != null) route.Text += resultRoute;
+            if (elapsedTime != null)
             {
-                processTiles = maze.TSPprocessRoute;
-                resultRoute = maze.TSPRoute;
-            } else
-            {
-                processTiles = maze.processRoute;
-                resultRoute = maze.BFSRoute;
+                extime.Text += elapsedTime.ToString();
+                extime.Text += " ms";
             }
-            finalPath = maze.GetFinalPath(resultRoute);
-            nodes.Text += (processTiles.Count - 1).ToString();
-            steps.Text += (finalPath.Count - 1).ToString();
-            route.Text += resultRoute;
         }
 
         public async void visualizeButton(object sender, RoutedEventArgs e)
@@ -198,16 +204,14 @@ namespace src
 
         public void setAlgorithm(object sender, RoutedEventArgs e)
         {
-            RadioButton rb = sender as RadioButton;
-            if (rb != null)
+            RadioButton rb = null!;
+            rb = sender as RadioButton;
+            algorithm = rb.Content.ToString();
+            if (mazeView != null)
             {
-                algorithm = rb.Content.ToString();
-                if (mazeView != null)
-                {
-                    search.IsEnabled = true;
-                }
-                visualize.IsEnabled = false;
+                search.IsEnabled = true;
             }
+            visualize.IsEnabled = false;
         }
 
         public void resetState()

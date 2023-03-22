@@ -1,20 +1,20 @@
 ﻿src
-1.0.0.0
+
 
 winexe
 C#
 .cs
-c:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\
 src
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-c:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\App.xaml
+C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\App.xaml
 31647132662
 
-11267202369
+11-1314815659
 194-1251378414
 MainWindow.xaml;Views\MazeView.xaml;Views\TileView.xaml;
 
-True
+False
 

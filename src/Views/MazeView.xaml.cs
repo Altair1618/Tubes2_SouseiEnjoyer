@@ -122,7 +122,8 @@ namespace Views
                 {
                     Tuple<int, int> prevCoordinate = maze.GetTileCoordinate(progressTile[i - 1]);
                     int prevTileId = progressTile[i - 1].Id - maze.GetFirstId();
-                    Border prevTile = mazeGrid.Children[prevTileId] as Border;
+                    Border prevTile = null!;
+                    prevTile = mazeGrid.Children[prevTileId] as Border;
                     SolidColorBrush color = new SolidColorBrush(Colors.Goldenrod);
                     color.Opacity = 0.15 * (maze.MazeLayout[prevCoordinate.Item1][prevCoordinate.Item2].Visited);
                     prevTile.Background = color;
