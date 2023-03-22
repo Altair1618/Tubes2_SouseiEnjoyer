@@ -19,7 +19,8 @@ namespace Drivers {
         static void Main(string[] args) {
             FileReader fileReader = new FileReader();
             Maze maze = fileReader.read("../../test/test2.txt");
-            maze.BFS(maze.GetStartingTile());
+            // maze.BFS(maze.GetStartingTile());
+            maze.TSP(maze.GetStartingTile());
             Console.WriteLine("\n--------TSP--------");
             Console.WriteLine("Route: " + maze.TSPRoute);
             Console.WriteLine("Steps: " + maze.TSPsteps);

@@ -214,7 +214,7 @@ namespace Mazes {
             return temp;
         }
 
-        public void BFS (Tile startingTile) {
+        public Tile BFS (Tile startingTile) {
             // restart
             BFSsteps = 0;
             BFSnodes = 0;
@@ -234,14 +234,20 @@ namespace Mazes {
                 }
             }
             Console.WriteLine("last temp: " + temp.Item1.Id);
+            return start;
+        }
 
+        public void TSP (Tile startingTile) {
+            // restart
+            Tile lastTreasure = BFS(startingTile);
             TSPnodes = BFSnodes;
             TSPsteps = BFSsteps;
             TSPRoute = BFSRoute;
             TSPprocessRoute = processRoute;
-            TSPfind(start);
-
+            TSPfind(lastTreasure);
         }
+
+
 
         public Tuple<Tile, string> TSPfind(Tile startingTile) {
             // initialize
