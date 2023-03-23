@@ -1,6 +1,6 @@
 using Mazes;
 using IO;
-// using Graphs;
+using Graphs;
 using System;
 using System.Collections.Generic;
 
@@ -56,16 +56,66 @@ namespace Drivers {
             Maze maze = new Maze();
             
             // Test 1 : RRRDDLL
-            string input = "KRRRXRXTXTRRXRXX";
-            int row = 4; int col = 4;
+            // string input = "KRRRXRXTXTRRXRXX";
+            // int row = 4; int col = 4;
 
             // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-            // string input = "XXTXXTXXRXXRKRRRRRXRXXRXXTXXTX";
-            // int row = 5, col = 6;
+            string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
+            int row = 5, col = 6;
 
             // Test 3 : RRRLLDD
             // string input = "KRRTXRXXXTXX";
             // int row = 3, col = 4;
+
+            // Test 4
+            // string input = "KTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRX";
+            // int row = 11, col = 4;
+            
+            int index = 0;
+            for (int i = 0; i < row; i++) {
+                maze.MazeLayout.Add(new List<Tile>());
+                for (int j = 0; j < col; j++) {
+                    maze.MazeLayout[i].Add(new Tile(input[index++]));
+                }
+            }
+            maze.UpdateTreasureCount();
+
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    Console.Write(maze.MazeLayout[i][j].Category + " ");
+                }
+                Console.WriteLine();
+            }
+            
+            (List<Tile> list, List<Tile> path) = maze.DFS();
+            
+            Console.WriteLine("Output:");
+            foreach (var item in list) {
+                Console.WriteLine(maze.GetTileCoordinate(item));
+            }
+            foreach (var item in path) {
+                Console.WriteLine(maze.GetTileCoordinate(item));
+            }
+
+            Console.WriteLine(maze.GetMove(path));
+        }
+    }
+
+    public class ShortestPathDriver {
+        static void Main(string[] args) {
+            Maze maze = new Maze();
+            
+            // Test 1
+            // string input = "KRRRXRXTXTRRXRXX";
+            // int row = 4; int col = 4;
+            
+            // Test 2
+            // string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
+            // int row = 5, col = 6;
+
+            // Test 3
+            string input = "KTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRX";
+            int row = 11, col = 4;
             
             int index = 0;
             for (int i = 0; i < row; i++) {
@@ -76,47 +126,15 @@ namespace Drivers {
             }
             maze.UpdateTreasureCount();
             
-            List<Tile> list = maze.DFS();
-            
-            Console.WriteLine("Output:");
-            foreach (var item in list) {
-                Console.WriteLine(maze.GetTileCoordinate(item));
+            Graph graph = maze.ToWeightedGraph();
+            Node startingNode = null!;
+            foreach (var node in graph.Nodes) {
+                if (node.Category == 'S') startingNode = node;
             }
-
-            Console.WriteLine(maze.GetMove(list));
+        
+            Console.WriteLine("Output:");
+            var temp = graph.ShortestPath(false);
+            Console.WriteLine(temp);
         }
     }
-
-    // public class ShortestPathDriver {
-    //     static void Main(string[] args) {
-    //         Maze maze = new Maze();
-            
-    //         // Test 1
-    //         string input = "KRRRXRXTXTRRXRXX";
-    //         int row = 4; int col = 4;
-            
-    //         // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-    //         // string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
-    //         // int row = 5, col = 6;
-            
-    //         int index = 0;
-    //         for (int i = 0; i < row; i++) {
-    //             maze.MazeLayout.Add(new List<Tile>());
-    //             for (int j = 0; j < col; j++) {
-    //                 maze.MazeLayout[i].Add(new Tile(input[index++]));
-    //             }
-    //         }
-    //         maze.UpdateTreasureCount();
-            
-    //         Graph graph = maze.ToWeightedGraph();
-    //         Node startingNode = null!;
-    //         foreach (var node in graph.Nodes) {
-    //             if (node.Category == 'S') startingNode = node;
-    //         }
-        
-    //         Console.WriteLine("Output:");
-    //         var temp = graph.ShortestPath(false);
-    //         Console.WriteLine(temp);
-    //     }
-    // }
 }

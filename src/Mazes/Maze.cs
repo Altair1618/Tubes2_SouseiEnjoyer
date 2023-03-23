@@ -328,17 +328,20 @@ namespace Mazes {
             return ret; 
         }
 
-        public List<Tile> DFS() {
+        public Tuple<List<Tile>, List<Tile>> DFS() {
             Stack<Tile> dfsStack = new Stack<Tile>();
             var prevTile = new Dictionary<Tile, Tile>();
+            var visited = new Dictionary<Tile, bool>();
             int visitedTreasure = 0;
 
-            List<Tile> retList = new List<Tile>();
+            List<Tile> retNode = new List<Tile>();
+            List<Tile> retPath = new List<Tile>();
 
             // Initiate state
             foreach (var tileList in MazeLayout) {
                 foreach (var tile in tileList) {
                     prevTile[tile] = null!;
+                    visited[tile] = false;
                 }
             }
 
@@ -347,13 +350,17 @@ namespace Mazes {
             while (dfsStack.Count > 0) {
                 // Initiate Search
                 Tile currentTile = dfsStack.Pop();
-                retList.Add(currentTile);
+                if (visited[currentTile]) continue;
+
+                visited[currentTile] = true;
+                retNode.Add(currentTile);
+                retPath.Add(currentTile);
                 if (currentTile.IsTreasure()) visitedTreasure++;
                 (int row, int col) = GetTileCoordinate(currentTile);
 
                 int cnt = 0;
                 if (IsIndexValid(row + 1, col) && MazeLayout[row + 1][col].IsWalkable()) {
-                    if (prevTile[MazeLayout[row + 1][col]] == null) {
+                    if (!visited[MazeLayout[row + 1][col]]) {
                         dfsStack.Push(MazeLayout[row + 1][col]);
                         prevTile[MazeLayout[row + 1][col]] = currentTile;
                         cnt++;
@@ -361,7 +368,7 @@ namespace Mazes {
                 }
 
                 if (IsIndexValid(row, col + 1) && MazeLayout[row][col + 1].IsWalkable()) {
-                    if (prevTile[MazeLayout[row][col + 1]] == null) {
+                    if (!visited[MazeLayout[row][col + 1]]) {
                         dfsStack.Push(MazeLayout[row][col + 1]);
                         prevTile[MazeLayout[row][col + 1]] = currentTile;
                         cnt++;
@@ -369,7 +376,7 @@ namespace Mazes {
                 }
 
                 if (IsIndexValid(row, col - 1) && MazeLayout[row][col - 1].IsWalkable()) {
-                    if (prevTile[MazeLayout[row][col - 1]] == null) {
+                    if (!visited[MazeLayout[row][col - 1]]) {
                         dfsStack.Push(MazeLayout[row][col - 1]);
                         prevTile[MazeLayout[row][col - 1]] = currentTile;
                         cnt++;
@@ -377,7 +384,7 @@ namespace Mazes {
                 }
 
                 if (IsIndexValid(row - 1, col) && MazeLayout[row - 1][col].IsWalkable()) {
-                    if (prevTile[MazeLayout[row - 1][col]] == null) {
+                    if (!visited[MazeLayout[row - 1][col]]) {
                         dfsStack.Push(MazeLayout[row - 1][col]);
                         prevTile[MazeLayout[row - 1][col]] = currentTile;
                         cnt++;
@@ -386,16 +393,20 @@ namespace Mazes {
 
                 if (treasureCount == visitedTreasure) break;
 
+                // Console.WriteLine(GetTileCoordinate(dfsStack.Peek()));
                 if (cnt == 0 && dfsStack.Count > 0) {
+                    bool foundTreasure = false;
                     while (currentTile != prevTile[dfsStack.Peek()]) {
+                        if (currentTile.Category == 'T') foundTreasure = true;
+                        if (!foundTreasure) retPath.Remove(currentTile);
                         currentTile = prevTile[currentTile];
-                        retList.Add(currentTile);
+                        retNode.Add(currentTile);
                     }
                 }
             }
             dfsStack.Clear();
 
-            return retList;
+            return Tuple.Create(retNode, retPath);
         }
 
         public string GetMove(List<Tile> path) {
@@ -424,12 +435,14 @@ namespace Mazes {
             public Tile PrevTile;
             public Tile LastNode;
             public string Path;
+            public bool Visited;
 
             // Constructor
-            public TileGraphState(Tile prev, Tile lastNode, string path) {
+            public TileGraphState(Tile prev, Tile lastNode, string path, bool visited) {
                 PrevTile = prev;
                 LastNode = lastNode;
                 Path = path;
+                Visited = visited;
             }
         }
 
@@ -443,7 +456,7 @@ namespace Mazes {
             // Initiate state
             foreach (var tileList in MazeLayout) {
                 foreach (var tile in tileList) {
-                    state[tile] = new TileGraphState(null!, null!, "");
+                    state[tile] = new TileGraphState(null!, null!, "", false);
                 }
             }
 
@@ -451,10 +464,13 @@ namespace Mazes {
             Node start = new Node('S');
             mapNodeTile[GetStartingTile()] = start;
             graph.AddNode(start);
-            state[GetStartingTile()] = new TileGraphState(null!, GetStartingTile(), "");
+            state[GetStartingTile()] = new TileGraphState(null!, GetStartingTile(), "", false);
             while (queueStack.Count > 0) {
                 // Initiate Search
                 Tile currentTile = queueStack.Pop();
+                if (state[currentTile].Visited) continue;
+
+                state[currentTile].Visited = true;
                 (int row, int col) = GetTileCoordinate(currentTile);
                 
                 if (currentTile.IsTreasure()) {
@@ -462,7 +478,7 @@ namespace Mazes {
                     mapNodeTile[currentTile] = tempNode;
                     graph.AddNode(tempNode);
                     graph.AddEdge(mapNodeTile[state[currentTile].LastNode], tempNode, state[currentTile].Path);
-                    state[currentTile] = new TileGraphState(state[currentTile].PrevTile, currentTile, "");
+                    state[currentTile] = new TileGraphState(state[currentTile].PrevTile, currentTile, "", true);
                 }
 
                 int cnt = 0;
@@ -476,7 +492,7 @@ namespace Mazes {
                     mapNodeTile[currentTile] = tempNode;
                     graph.AddNode(tempNode);
                     graph.AddEdge(mapNodeTile[state[currentTile].LastNode], tempNode, state[currentTile].Path);
-                    state[currentTile] = new TileGraphState(state[currentTile].PrevTile, currentTile, "");
+                    state[currentTile] = new TileGraphState(state[currentTile].PrevTile, currentTile, "", true);
                 }
                 
                 Tile accessedTile;
@@ -484,7 +500,7 @@ namespace Mazes {
                 if (IsIndexValid(row + 1, col) ) {
                     accessedTile = MazeLayout[row + 1][col];
                     if (accessedTile.IsWalkable()) {
-                        if (state[accessedTile].PrevTile == null) {
+                        if (!state[accessedTile].Visited) {
                             state[accessedTile].Path = state[currentTile].Path + "D";
                             state[accessedTile].PrevTile = currentTile;
                             state[accessedTile].LastNode = state[currentTile].LastNode;
@@ -498,7 +514,7 @@ namespace Mazes {
                 if (IsIndexValid(row, col + 1)) {
                     accessedTile = MazeLayout[row][col + 1];
                     if (accessedTile.IsWalkable()) {
-                        if (state[accessedTile].PrevTile == null) {
+                        if (!state[accessedTile].Visited) {
                             state[accessedTile].Path = state[currentTile].Path + "R";
                             state[accessedTile].PrevTile = currentTile;
                             state[accessedTile].LastNode = state[currentTile].LastNode;
@@ -512,7 +528,7 @@ namespace Mazes {
                 if (IsIndexValid(row, col - 1)) {
                     accessedTile = MazeLayout[row][col - 1];
                     if (accessedTile.IsWalkable()) {
-                        if (state[accessedTile].PrevTile == null) {
+                        if (!state[accessedTile].Visited) {
                             state[accessedTile].Path = state[currentTile].Path + "L";
                             state[accessedTile].PrevTile = currentTile;
                             state[accessedTile].LastNode = state[currentTile].LastNode;
@@ -526,7 +542,7 @@ namespace Mazes {
                 if (IsIndexValid(row - 1, col)) {
                     accessedTile = MazeLayout[row - 1][col];
                     if (accessedTile.IsWalkable()) {
-                        if (state[accessedTile].PrevTile == null) {
+                        if (!state[accessedTile].Visited) {
                             state[accessedTile].Path = state[currentTile].Path + "U";
                             state[accessedTile].PrevTile = currentTile;
                             state[accessedTile].LastNode = state[currentTile].LastNode;

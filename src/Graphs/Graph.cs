@@ -91,12 +91,12 @@ namespace Graphs {
                 }
             }
 
-            foreach (var node in newGraph.Nodes) {
-                //Console.WriteLine(node.Id);
-                foreach (var edge in node.Edges) {
-                    //Console.WriteLine(edge.Src.Id + " " + edge.Dest.Id + " " + edge.Path);
-                }
-            }
+            // foreach (var node in newGraph.Nodes) {
+            //     Console.WriteLine(node.Id);
+            //     foreach (var edge in node.Edges) {
+            //         Console.WriteLine(edge.Src.Id + " " + edge.Dest.Id + " " + edge.Path);
+            //     }
+            // }
 
             return newGraph;
         }
