@@ -86,7 +86,7 @@ namespace src
                     }
 
                     int tileSize = Math.Min(100, (int)mazePanel.ActualWidth / maze.GetCol());
-                    tileSize = Math.Min(tileSize, (int)System.Windows.SystemParameters.PrimaryScreenHeight / maze.GetRow());
+                    tileSize = Math.Min(tileSize, (int)System.Windows.SystemParameters.PrimaryScreenHeight / maze.GetRow() - 8);
                     tileSize = Math.Max(tileSize, 20);
                     mazeView = new MazeView(maze, tileSize);
                     mazeView.Width = maze.GetCol() * tileSize;
@@ -126,9 +126,8 @@ namespace src
             } else if (algorithm == "DFS")
             {
                 stopwatch.Start();
-                processTiles = maze.DFS();
+                (processTiles, finalPath) = maze.DFS();
                 stopwatch.Stop();
-                finalPath = processTiles;
                 resultRoute = maze.GetMove(finalPath);
                 elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
             } else if (algorithm == "TSP")

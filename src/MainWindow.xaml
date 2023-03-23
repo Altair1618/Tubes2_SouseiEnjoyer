@@ -74,12 +74,21 @@
 						<TextBlock Text="Time in between"
 									Foreground="White"
 									FontSize="16" />
+						<DockPanel DockPanel.Dock="Right">
+						<TextBlock Text="ms"
+								   DockPanel.Dock="Right"
+								   TextAlignment="Right"
+									Foreground="White"
+									FontSize="16" />
 						<TextBox Text="{Binding ElementName=timeDelaySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
 								 Background="Transparent"
 								 Foreground="White"
-								 DockPanel.Dock="Right" 
+								 DockPanel.Dock="Right"
 								 TextAlignment="Right"
-								 BorderThickness="0"/>
+								 BorderThickness="0"
+								 FontSize="16"/>
+							
+						</DockPanel>
 					</DockPanel>
 					<Slider Minimum="100" 
 							Maximum="1000" 
