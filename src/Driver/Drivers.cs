@@ -54,7 +54,7 @@ namespace Drivers {
     public class DFSDriver {
         static void Main(string[] args) {
             FileReader fileReader = new FileReader();
-            Maze maze = fileReader.read("../../test/test2.txt");
+            Maze maze = fileReader.read("../../test/test6.txt");
 
             for (int i = 0; i < maze.GetRow(); i++) {
                 for (int j = 0; j < maze.GetCol(); j++) {
@@ -63,18 +63,14 @@ namespace Drivers {
                 Console.WriteLine();
             }
             
-            (List<Tile> list, List<Tile> path) = maze.DFS();
+            List<Tile> list = maze.DFS();
             
             Console.WriteLine("Output:");
             foreach (var item in list) {
                 Console.WriteLine(maze.GetTileCoordinate(item));
             }
-            Console.WriteLine("Path:");
-            foreach (var item in path) {
-                Console.WriteLine(maze.GetTileCoordinate(item));
-            }
 
-            Console.WriteLine(maze.GetMove(path));
+            Console.WriteLine(maze.GetMove(list));
         }
     }
 

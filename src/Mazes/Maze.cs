@@ -328,14 +328,13 @@ namespace Mazes {
             return ret; 
         }
 
-        public Tuple<List<Tile>, List<Tile>> DFS() {
+        public List<Tile> DFS() {
             Stack<Tile> dfsStack = new Stack<Tile>();
             var prevTile = new Dictionary<Tile, Tile>();
             var visited = new Dictionary<Tile, bool>();
             int visitedTreasure = 0;
 
             List<Tile> retNode = new List<Tile>();
-            List<Tile> retPath = new List<Tile>();
 
             // Initiate state
             foreach (var tileList in MazeLayout) {
@@ -350,11 +349,11 @@ namespace Mazes {
             while (dfsStack.Count > 0) {
                 // Initiate Search
                 Tile currentTile = dfsStack.Pop();
+                Console.WriteLine(GetTileCoordinate(currentTile));
                 if (visited[currentTile]) continue;
 
                 visited[currentTile] = true;
                 retNode.Add(currentTile);
-                retPath.Add(currentTile);
                 if (currentTile.IsTreasure()) visitedTreasure++;
                 (int row, int col) = GetTileCoordinate(currentTile);
 
@@ -392,21 +391,17 @@ namespace Mazes {
                 }
 
                 if (treasureCount == visitedTreasure) break;
-
+                
                 if (cnt == 0 && dfsStack.Count > 0) {
-                    bool foundTreasure = false;
                     while (currentTile != prevTile[dfsStack.Peek()]) {
-                        if (currentTile.Category == 'T') foundTreasure = true;
-                        if (!foundTreasure) retPath.Remove(currentTile);
                         currentTile = prevTile[currentTile];
                         retNode.Add(currentTile);
-                        if (retPath[retPath.Count - 1] != currentTile) retPath.Add(currentTile);
                     }
                 }
             }
             dfsStack.Clear();
 
-            return Tuple.Create(retNode, retPath);
+            return retNode;
         }
 
         public string GetMove(List<Tile> path) {
