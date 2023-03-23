@@ -108,7 +108,7 @@ namespace src
 
         }
 
-        public void searchButton(object sender, RoutedEventArgs e)
+        public async void searchButton(object sender, RoutedEventArgs e)
         {
             this.resetState();
             Stopwatch stopwatch = new Stopwatch();
@@ -126,8 +126,9 @@ namespace src
             } else if (algorithm == "DFS")
             {
                 stopwatch.Start();
-                (processTiles, finalPath) = maze.DFS();
+                processTiles = maze.DFS();
                 stopwatch.Stop();
+                finalPath = processTiles;
                 resultRoute = maze.GetMove(finalPath);
                 elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
             } else if (algorithm == "TSP")
@@ -147,7 +148,7 @@ namespace src
                 getAndUpdateShortestPath(true);
             }
 
-            updateResult();
+            await updateResult();
             visualize.IsEnabled = true;
             search.IsEnabled = false;
         }
@@ -164,9 +165,9 @@ namespace src
             elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
         }
 
-        private void updateResult()
+        private async Task updateResult()
         {
-            if (processTiles != null) nodes.Text += (processTiles.Count - 1).ToString();
+            if (processTiles != null) nodes.Text += (processTiles.Count).ToString();
             if (finalPath != null) steps.Text += (finalPath.Count - 1).ToString();
             if (resultRoute != null) route.Text += resultRoute;
             if (elapsedTime != null)
@@ -174,6 +175,7 @@ namespace src
                 extime.Text += elapsedTime.ToString();
                 extime.Text += " ms";
             }
+            if (finalPath != null) await mazeView.ShowFinalPath(finalPath);
         }
 
         public async void visualizeButton(object sender, RoutedEventArgs e)

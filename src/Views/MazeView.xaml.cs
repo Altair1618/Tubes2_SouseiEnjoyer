@@ -131,6 +131,15 @@ namespace Views
                 maze.MazeLayout[coordinate.Item1][coordinate.Item2].Visited++;
                 tile.Background = new SolidColorBrush(Colors.SkyBlue);
             }
+
+            await Task.Delay(timeDelay);
+            Tuple<int, int> lastCoordinate = maze.GetTileCoordinate(progressTile[progressTile.Count - 1]);
+            int lastTileId = progressTile[progressTile.Count - 1].Id - maze.GetFirstId();
+            Border lastTile = null!;
+            lastTile = mazeGrid.Children[lastTileId] as Border;
+            SolidColorBrush lastColor = new SolidColorBrush(Colors.Goldenrod);
+            lastColor.Opacity = 0.15 * (maze.MazeLayout[lastCoordinate.Item1][lastCoordinate.Item2].Visited);
+            lastTile.Background = lastColor;
         }
     }
 }
