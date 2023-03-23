@@ -392,12 +392,16 @@ namespace Mazes {
 
                 if (treasureCount == visitedTreasure) break;
                 
+                // Console.WriteLine("Loop:");
                 if (cnt == 0 && dfsStack.Count > 0) {
+                    while (visited[dfsStack.Peek()]) dfsStack.Pop();
                     while (currentTile != prevTile[dfsStack.Peek()]) {
+                        // Console.WriteLine(GetTileCoordinate(currentTile));
                         currentTile = prevTile[currentTile];
                         retNode.Add(currentTile);
                     }
                 }
+                // Console.WriteLine("End Loop");
             }
             dfsStack.Clear();
 
