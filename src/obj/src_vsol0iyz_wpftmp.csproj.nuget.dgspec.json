@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\FARHAN\\Kuliah\\Semester 4\\Stima\\Tubes2\\Tubes2_SouseiEnjoyer\\src\\src.csproj": {}
+  },
+  "projects": {
+    "D:\\FARHAN\\Kuliah\\Semester 4\\Stima\\Tubes2\\Tubes2_SouseiEnjoyer\\src\\src.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\FARHAN\\Kuliah\\Semester 4\\Stima\\Tubes2\\Tubes2_SouseiEnjoyer\\src\\src.csproj",
+        "projectName": "TreasureHunt",
+        "projectPath": "D:\\FARHAN\\Kuliah\\Semester 4\\Stima\\Tubes2\\Tubes2_SouseiEnjoyer\\src\\src.csproj",
+        "packagesPath": "C:\\Users\\farha\\.nuget\\packages\\",
+        "outputPath": "D:\\FARHAN\\Kuliah\\Semester 4\\Stima\\Tubes2\\Tubes2_SouseiEnjoyer\\src\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\farha\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
