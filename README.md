@@ -31,9 +31,9 @@ dotnet build src/src.csproj
 1. Navigate to the  `bin/net6.0-windows` directory
 2. Launch the application by running the following command:
 ```
-dotnet src.dll
+dotnet TreasureHuntSolver.dll
 ```
-2. Or you can double click on the `src.exe` file
+2. Or you can double click on the `TreasureHuntSolver.exe` file
 2. Click the "Input File" button to select the maze text file
 3. Select the search algorithm (BFS, DFS, TSP, Shortest Path, or Shortest Path (TSP)) from the control menu.
 4. Click the "Search" button to find the route to all treasures.
@@ -49,7 +49,7 @@ Here's an explanation for the path's color
 the opacity of the path indicates how often the path accessed by the algorithm/program (kobo)
 
 ## Troubleshooting
-1. If the build failed because of duplicate assembly code, remove all obj folder in `src/Driver` and `src` then rebuild using the build instructions command
+1. If the build failed because of duplicate assembly code, remove all obj folder in `src/Driver` then rebuild using the build instructions command
 2. If the build failed and said "Please restore and try again", run the following command 
 ```
 dotnet restore src/src.csproj

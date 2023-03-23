@@ -1,28 +1,3 @@
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.exe
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.deps.json
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.runtimeconfig.json
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.dll
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\src.pdb
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.AssemblyReference.cache
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\MazeView.baml
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\TileView.baml
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.g.cs
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\MazeView.g.cs
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\TileView.g.cs
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\App.g.cs
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.cache
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src_MarkupCompile.lref
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.baml
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.g.resources
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.GeneratedMSBuildEditorConfig.editorconfig
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.AssemblyInfoInputs.cache
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.AssemblyInfo.cs
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.CoreCompileInputs.cache
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.dll
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\refint\src.dll
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.pdb
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.genruntimeconfig.cache
-D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\ref\src.dll
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.AssemblyReference.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\MazeView.baml
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\TileView.baml
@@ -48,3 +23,28 @@ C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-wi
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.pdb
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.genruntimeconfig.cache
 C:\Users\USER\Documents\Development\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\ref\src.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.AssemblyReference.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\MazeView.baml
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\TileView.baml
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\MazeView.g.cs
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\Views\TileView.g.cs
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\App.g.cs
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\MainWindow.baml
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.GeneratedMSBuildEditorConfig.editorconfig
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.AssemblyInfoInputs.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.AssemblyInfo.cs
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.csproj.CoreCompileInputs.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\src.genruntimeconfig.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\TreasureHuntSolver_MarkupCompile.cache
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\TreasureHuntSolver_MarkupCompile.lref
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\TreasureHuntSolver.exe
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\TreasureHuntSolver.deps.json
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\TreasureHuntSolver.runtimeconfig.json
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\TreasureHuntSolver.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\bin\net6.0-windows\TreasureHuntSolver.pdb
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\TreasureHuntSolver.g.resources
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\TreasureHuntSolver.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\refint\TreasureHuntSolver.dll
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\TreasureHuntSolver.pdb
+D:\FARHAN\Kuliah\Semester 4\Stima\Tubes2\Tubes2_SouseiEnjoyer\src\obj\Debug\net6.0-windows\ref\TreasureHuntSolver.dll
