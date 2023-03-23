@@ -53,39 +53,11 @@ namespace Drivers {
 
     public class DFSDriver {
         static void Main(string[] args) {
-            Maze maze = new Maze();
-            
-            // Test 1 : RRRDDLL
-            // string input = "KRRRXRXTXTRRXRXX";
-            // int row = 4; int col = 4;
+            FileReader fileReader = new FileReader();
+            Maze maze = fileReader.read("../../test/test2.txt");
 
-            // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-            // string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
-            // int row = 5, col = 6;
-
-            // Test 3 : RRRLLDD
-            // string input = "KRRTXRXXXTXX";
-            // int row = 3, col = 4;
-
-            // Test 4
-            // string input = "KTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRX";
-            // int row = 11, col = 4;
-
-            // Test 5
-            string input = "XXXXXXXTKRTXXXXXXX";
-            int row = 3, col = 6;
-            
-            int index = 0;
-            for (int i = 0; i < row; i++) {
-                maze.MazeLayout.Add(new List<Tile>());
-                for (int j = 0; j < col; j++) {
-                    maze.MazeLayout[i].Add(new Tile(input[index++]));
-                }
-            }
-            maze.UpdateTreasureCount();
-
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
+            for (int i = 0; i < maze.GetRow(); i++) {
+                for (int j = 0; j < maze.GetCol(); j++) {
                     Console.Write(maze.MazeLayout[i][j].Category + " ");
                 }
                 Console.WriteLine();
