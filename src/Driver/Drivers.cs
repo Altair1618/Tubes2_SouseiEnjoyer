@@ -60,8 +60,8 @@ namespace Drivers {
             // int row = 4; int col = 4;
 
             // Test 2 : RRUUDDRRRUUDDLDDUULLLDD
-            string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
-            int row = 5, col = 6;
+            // string input = "XXRXXTXXTXXRKRRRRRXRXXRXXTXXTX";
+            // int row = 5, col = 6;
 
             // Test 3 : RRRLLDD
             // string input = "KRRTXRXXXTXX";
@@ -70,6 +70,10 @@ namespace Drivers {
             // Test 4
             // string input = "KTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRXXTRX";
             // int row = 11, col = 4;
+
+            // Test 5
+            string input = "XXXXXXXTKRTXXXXXXX";
+            int row = 3, col = 6;
             
             int index = 0;
             for (int i = 0; i < row; i++) {
@@ -93,6 +97,7 @@ namespace Drivers {
             foreach (var item in list) {
                 Console.WriteLine(maze.GetTileCoordinate(item));
             }
+            Console.WriteLine("Path:");
             foreach (var item in path) {
                 Console.WriteLine(maze.GetTileCoordinate(item));
             }

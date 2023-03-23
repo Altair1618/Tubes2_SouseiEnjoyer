@@ -351,6 +351,7 @@ namespace Mazes {
                 // Initiate Search
                 Tile currentTile = dfsStack.Pop();
                 if (visited[currentTile]) continue;
+                Console.WriteLine(GetTileCoordinate(currentTile));
 
                 visited[currentTile] = true;
                 retNode.Add(currentTile);
@@ -393,7 +394,6 @@ namespace Mazes {
 
                 if (treasureCount == visitedTreasure) break;
 
-                // Console.WriteLine(GetTileCoordinate(dfsStack.Peek()));
                 if (cnt == 0 && dfsStack.Count > 0) {
                     bool foundTreasure = false;
                     while (currentTile != prevTile[dfsStack.Peek()]) {
@@ -401,6 +401,7 @@ namespace Mazes {
                         if (!foundTreasure) retPath.Remove(currentTile);
                         currentTile = prevTile[currentTile];
                         retNode.Add(currentTile);
+                        retPath.Add(currentTile);
                     }
                 }
             }
