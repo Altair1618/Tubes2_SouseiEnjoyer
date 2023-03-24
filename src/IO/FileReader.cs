@@ -10,21 +10,29 @@ namespace IO
 {
     public class FileReader
     {
+        int startCount = 0;
         public Maze read(string filePath)
         {
             Maze maze = new Maze();
+            startCount = 0;
             using (StreamReader sr = new StreamReader(filePath))
             {
                 string? line;
-                // Read and display lines from the file until the end of
-                // the file is reached.
                 while ((line = sr.ReadLine()) != null)
                 {
                     List<Tile> tiles = convertLine(line);
                     maze.MazeLayout.Add(tiles);
                 }
             }
+            if (startCount != 1)
+            {
+                throw new FileFormatException();
+            }
             maze.UpdateTreasureCount();
+            if (maze.treasureCount == 0)
+            {
+                throw new FileFormatException();
+            }
             return maze;
         }
 
@@ -35,6 +43,7 @@ namespace IO
             foreach (string s in strings)
             {
                 tiles.Add(new Tile(s.ToCharArray()[0]));
+                if (tiles[tiles.Count - 1].IsStartingPoint()) { startCount++; }
             }
 
             return tiles;

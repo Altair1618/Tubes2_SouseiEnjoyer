@@ -22,7 +22,10 @@ namespace Mazes {
         public List<Tile> TSPprocessRoute {
             get; private set;
         }
-        private int treasureCount;
+        public int treasureCount
+        {
+            get; private set;
+        }
         
         private HashSet <Tile> visitedTreasures;
         

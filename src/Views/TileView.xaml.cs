@@ -14,7 +14,6 @@ namespace Views
         {
             InitializeComponent();
 
-            // tileBorder.SetValue(Border.CornerRadiusProperty, new CornerRadius(10));
             this.tileSize = tileSize;
             if (tile.IsWalkable() || tile.IsStartingPoint())
             {
@@ -27,13 +26,6 @@ namespace Views
 
             if (tile.IsTreasure() || tile.IsStartingPoint())
             {
-                // Create Image Element
-                /*                Border b2 = new Border();
-                                ImageBrush image = new ImageBrush();
-
-                                BitmapImage myBitmapImage = new BitmapImage();
-
-                                myBitmapImage.BeginInit();*/
                 string uri = "";
                 if (tile.IsTreasure())
                 {
@@ -50,46 +42,46 @@ namespace Views
         public void addImage(string uriPath)
         {
             tileBorder.Child = null;
-            Border b2 = new Border();
+            Border imageBorder = new Border();
             ImageBrush image = new ImageBrush();
 
-            BitmapImage myBitmapImage = new BitmapImage();
+            BitmapImage bitmapImage = new BitmapImage();
 
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(uriPath, UriKind.Relative);
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(uriPath, UriKind.Relative);
 
-            myBitmapImage.DecodePixelWidth = (int)(0.4 * tileSize);
-            myBitmapImage.EndInit();
+            bitmapImage.DecodePixelWidth = (int)(0.4 * tileSize);
+            bitmapImage.EndInit();
 
-            image.ImageSource = myBitmapImage;
-            b2.Background = image;
-            b2.Width = (int)(0.4 * tileSize);
-            b2.Height = (int)(0.4 * tileSize);
-            tileBorder.Child = b2;
+            image.ImageSource = bitmapImage;
+            imageBorder.Background = image;
+            imageBorder.Width = (int)(0.4 * tileSize);
+            imageBorder.Height = (int)(0.4 * tileSize);
+            tileBorder.Child = imageBorder;
         }
 
         public void addImageOnImage(string uriPath)
         {
             if (tileBorder.Child != null)
             {
-                Border b2 = new Border();
+                Border imageBorder = new Border();
                 ImageBrush image = new ImageBrush();
 
-                BitmapImage myBitmapImage = new BitmapImage();
+                BitmapImage bitmapImage = new BitmapImage();
 
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(uriPath, UriKind.Relative);
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(uriPath, UriKind.Relative);
 
-                myBitmapImage.DecodePixelWidth = (int)(0.4 * tileSize);
-                myBitmapImage.EndInit();
+                bitmapImage.DecodePixelWidth = (int)(0.4 * tileSize);
+                bitmapImage.EndInit();
 
-                image.ImageSource = myBitmapImage;
-                b2.Background = image;
-                b2.Name = "imageOnImage";
-                b2.Width = (int)(0.4 * tileSize);
-                b2.Height = (int)(0.4 * tileSize);
+                image.ImageSource = bitmapImage;
+                imageBorder.Background = image;
+                imageBorder.Name = "imageOnImage";
+                imageBorder.Width = (int)(0.4 * tileSize);
+                imageBorder.Height = (int)(0.4 * tileSize);
                 Border? tileBorderChild = tileBorder.Child as Border;
-                if (tileBorderChild != null) tileBorderChild.Child = b2;
+                if (tileBorderChild != null) tileBorderChild.Child = imageBorder;
             } else
             {
                 this.addImage(uriPath);

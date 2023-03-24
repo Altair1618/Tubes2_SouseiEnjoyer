@@ -41,23 +41,23 @@ namespace src
             InitializeComponent();
             Uri iconUri = new Uri("../../src/assets/treasure.ico", UriKind.Relative);
             window.Icon = BitmapFrame.Create(iconUri);
-            Border b2 = new Border();
+            Border imageBorder = new Border();
             ImageBrush image = new ImageBrush();
-            BitmapImage myBitmapImage = new BitmapImage();
+            BitmapImage bitmapImage = new BitmapImage();
 
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("../../src/assets/kobo.png", UriKind.Relative);
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri("../../src/assets/kobo.png", UriKind.Relative);
 
-            myBitmapImage.DecodePixelWidth = 200;
-            myBitmapImage.EndInit();
+            bitmapImage.DecodePixelWidth = 200;
+            bitmapImage.EndInit();
 
-            image.ImageSource = myBitmapImage;
-            b2.Background = image;
-            b2.HorizontalAlignment = HorizontalAlignment.Left;
-            b2.VerticalAlignment = VerticalAlignment.Bottom;
-            b2.Width = 200;
-            b2.Height = 200;
-            gridBorder.Child = b2;
+            image.ImageSource = bitmapImage;
+            imageBorder.Background = image;
+            imageBorder.HorizontalAlignment = HorizontalAlignment.Left;
+            imageBorder.VerticalAlignment = VerticalAlignment.Bottom;
+            imageBorder.Width = 200;
+            imageBorder.Height = 200;
+            gridBorder.Child = imageBorder;
         }
 
         public void openFileButton(object sender, RoutedEventArgs e)
@@ -72,21 +72,13 @@ namespace src
                     filename.Text = openFileDialog.SafeFileName;
                     FileReader fileReader = new FileReader();
                     maze = fileReader.read(openFileDialog.FileName);
-                    foreach (var row in maze.MazeLayout)
-                    {
-                        foreach(var col in row)
-                        {
-                            Trace.Write(col.Category + " ");
-                        }
-                        Trace.WriteLine("");
-                    }
                     if (mazePanel.Children.Count > 0)
                     {
                         mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
                     }
 
                     int tileSize = Math.Min(100, (int)mazePanel.ActualWidth / maze.GetCol());
-                    tileSize = Math.Min(tileSize, (int)System.Windows.SystemParameters.PrimaryScreenHeight / maze.GetRow() - 8);
+                    tileSize = Math.Min(tileSize, (int)(System.Windows.SystemParameters.PrimaryScreenHeight - 100) / maze.GetRow());
                     tileSize = Math.Max(tileSize, 20);
                     mazeView = new MazeView(maze, tileSize);
                     mazeView.Width = maze.GetCol() * tileSize;
@@ -103,6 +95,10 @@ namespace src
                     Trace.WriteLine(ex.ToString());
                     MessageBox.Show("Invalid file format");
                     filename.Text = "-";
+                    if (mazePanel.Children.Count > 0)
+                    {
+                        mazePanel.Children.RemoveAt(mazePanel.Children.Count - 1);
+                    }
                 }
             }
 
@@ -194,15 +190,6 @@ namespace src
             }
         }
 
-        public void replayButton(object sender, RoutedEventArgs e)
-        {
-            if (mazeView != null)
-            {
-                visualize.IsEnabled = true;
-                mazeView.Reset();
-            }
-        }
-
         public void setAlgorithm(object sender, RoutedEventArgs e)
         {
             RadioButton rb = null!;
@@ -223,7 +210,6 @@ namespace src
             extime.Text = "Execution Time: ";
             search.IsEnabled = false;
             visualize.IsEnabled = false;
-            //replay.IsEnabled = false;
         }
 
         public void setTimeDelay(object sender, RoutedEventArgs e)
